@@ -6,4 +6,4 @@ import javax.inject.Qualifier
 @Documented
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
-annotation class MockyRetrofit()
+internal annotation class MockyRetrofit()
