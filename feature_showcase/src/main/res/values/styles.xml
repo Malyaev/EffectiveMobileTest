@@ -11,4 +11,25 @@
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="fontFamily">@font/mark_pro_normal</item>
     </style>
+    <style name="Style.FetureShowcase.TextInputLayout.OnBackground" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="backgroundTint">?attr/colorSurface</item>
+        <item name="hintTextColor">?attr/hintTextColor</item>
+        <item name="shapeAppearanceOverlay">@style/Style.FetureShowcase.Rounded</item>
+    </style>
+    <style name="Style.FetureShowcase.EditText.OnBackground" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="fontFamily">@font/mark_pro_normal</item>
+        <item name="backgroundTint">?attr/colorSurface</item>
+    </style>
+    <style name="Style.FetureShowcase.Button.Round.Secondary" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/round</item>
+    </style>
+
+    <style name="Style.FetureShowcase.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
 </resources>
