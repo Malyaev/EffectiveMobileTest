@@ -26,6 +26,7 @@
     <style name="Style.FetureShowcase.Button.Round.Secondary" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">@drawable/round</item>
     </style>
+
     <style name="Style.FetureShowcase.Button.HotSales" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="backgroundTint">@color/white</item>
