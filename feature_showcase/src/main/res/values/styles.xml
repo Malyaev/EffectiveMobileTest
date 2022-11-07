@@ -36,18 +36,29 @@
         <item name="elevation">0dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
-        <item name="textAppearanceButton">@style/Style.FetureShowcaseTextAppearance.Button.HotSales</item>
-        <item name="android:textAppearance">@style/Style.FetureShowcaseTextAppearance.Button.HotSales</item>
+        <item name="textAppearanceButton">@style/Style.FetureShowcase.TextAppearance.Button.HotSales</item>
+        <item name="android:textAppearance">@style/Style.FetureShowcase.TextAppearance.Button.HotSales</item>
     </style>
-    <style name="Style.FetureShowcaseTextAppearance.Button.HotSales" parent="TextAppearance.MaterialComponents.Button">
+    <style name="Style.FetureShowcase.TextAppearance.Button.HotSales" parent="TextAppearance.MaterialComponents.Button">
         <item name="fontFamily">@font/sfprodisplay_bold</item>
         <item name="android:fontFamily">@font/sfprodisplay_bold</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">11sp</item>
     </style>
-    <style name="Style.FetureShowcase.CheckBox.Like" parent="">
-        <item name="android:button">@drawable/like_checkbox</item>
-        <item name="iconGravity">end</item>
+    <style name="Style.FetureShowcase.Button.TitleTextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:textAppearance">@style/Style.FetureShowcase.TextAppearance.Button.TitleTextButton</item>
+    </style>
+    <style name="Style.FetureShowcase.TextAppearance.Button.TitleTextButton" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/mark_pro_light</item>
+        <item name="android:fontFamily">@font/mark_pro_light</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
     <style name="Style.FetureShowcase.Rounded" parent="">
