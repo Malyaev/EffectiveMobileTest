@@ -6,4 +6,7 @@
     <string name="new_">new</string>
     <string name="filter_options">Filter options</string>
     <string name="done">Done</string>
+    <string name="brand">Brand</string>
+    <string name="prise">Prise</string>
+    <string name="size">Size</string>
 </resources>

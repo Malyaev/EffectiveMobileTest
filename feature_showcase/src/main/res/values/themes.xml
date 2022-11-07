@@ -2,5 +2,6 @@
     <style name="Theme.EffectiveMobileTest.FeatureShowCase" parent="Theme.EffectiveMobileTest">
         <item name="hintTextColor">@color/dark_bleu_50_transparent</item>
         <item name="prise_without_discount_color">@color/grey_dark</item>
+        <item name="outlined_color">@color/grey_light</item>
     </style>
 </resources>
