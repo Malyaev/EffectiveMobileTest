@@ -39,12 +39,15 @@
         <item name="textAppearanceButton">@style/Style.FetureShowcaseTextAppearance.Button.HotSales</item>
         <item name="android:textAppearance">@style/Style.FetureShowcaseTextAppearance.Button.HotSales</item>
     </style>
-
     <style name="Style.FetureShowcaseTextAppearance.Button.HotSales" parent="TextAppearance.MaterialComponents.Button">
         <item name="fontFamily">@font/sfprodisplay_bold</item>
         <item name="android:fontFamily">@font/sfprodisplay_bold</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">11sp</item>
+    </style>
+    <style name="Style.FetureShowcase.CheckBox.Like" parent="">
+        <item name="android:button">@drawable/like_checkbox</item>
+        <item name="iconGravity">end</item>
     </style>
 
     <style name="Style.FetureShowcase.Rounded" parent="">
