@@ -17,5 +17,7 @@
         <item name="background">@color/light_gray</item>
         <item name="android:windowBackground">@color/light_gray</item>
         <item name="android:colorBackground">@color/light_gray</item>
+
+        <item name="android:textAppearance">@style/Style.App.TextAppearance</item>
     </style>
 </resources>
