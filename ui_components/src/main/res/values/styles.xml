@@ -4,13 +4,13 @@
         <item name="boxStrokeWidth">0dp</item>
         <item name="backgroundTint">?attr/colorSurface</item>
         <item name="hintTextColor">?attr/hintTextColor</item>
-        <item name="shapeAppearanceOverlay">@style/Style.FetureShowcase.Rounded</item>
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded</item>
     </style>
     <style name="Style.App.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeWidth">1dp</item>
         <item name="backgroundTint">?attr/colorSurface</item>
         <item name="hintTextColor">?attr/hintTextColor</item>
-        <item name="shapeAppearanceOverlay">@style/Style.FetureShowcase.Rounded.ExtraLight</item>
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.ExtraLight</item>
     </style>
     <style name="Style.App.MaterialAutoCompleteTextView.Light" parent="Widget.AppCompat.Light.AutoCompleteTextView">
         <item name="android:textSize">14sp</item>
@@ -28,14 +28,14 @@
     </style>
     <style name="Style.App.ImageButton.Square" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">?attr/colorPrimary</item>
-        <item name="shapeAppearanceOverlay">Style.FetureShowcase.Rounded.Light</item>
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.Light</item>
     </style>
     <style name="Style.App.Button.Filled.Secondary">
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="backgroundTint">?attr/colorSecondary</item>
     </style>
     <style name="Style.App.Button.Filled.Rounded">
-        <item name="shapeAppearanceOverlay">@style/Style.FetureShowcase.Rounded.Light</item>
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.Light</item>
     </style>
     <style name="Style.App.Button.Filled" parent="Widget.MaterialComponents.Button">
         <item name="android:paddingLeft">0dp</item>
@@ -73,14 +73,14 @@
         <item name="android:fontFamily">@font/mark_pro_normal</item>
         <item name="android:textColor">?attr/colorPrimary</item>
     </style>
-    <style name="Style.FetureShowcase.Rounded" parent="">
+    <style name="Style.App.Rounded" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
     </style>
-    <style name="Style.FetureShowcase.Rounded.Light">
+    <style name="Style.App.Rounded.Light">
         <item name="cornerSize">10dp</item>
     </style>
-    <style name="Style.FetureShowcase.Rounded.ExtraLight">
+    <style name="Style.App.Rounded.ExtraLight">
         <item name="cornerSize">5dp</item>
     </style>
 
