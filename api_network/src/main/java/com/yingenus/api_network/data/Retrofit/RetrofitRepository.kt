@@ -6,6 +6,7 @@ import com.yingenus.api_network.api.StoreRepository
 import com.yingenus.api_network.api.dto.Cart
 import com.yingenus.api_network.api.dto.HomeStore
 import com.yingenus.api_network.api.dto.Product
+import com.yingenus.api_network.api.dto.Showcase
 import com.yingenus.api_network.di.MockyRetrofit
 import com.yingenus.core.Result
 import kotlinx.coroutines.flow.Flow
@@ -35,9 +36,9 @@ internal class RetrofitRepository @Inject constructor(@MockyRetrofit val retrofi
             .catch { emit(Result.Error(it)) }
     }
 
-    override fun getHomeStore(): Flow<Result<HomeStore>> {
+    override fun getShowcase(): Flow<Result<Showcase>> {
         return mockyIoService
-            .getHomeStore()
+            .getShowcase()
             .map { it?.let { Result.Success(it) }?: Result.Empty() }
             .catch { emit(Result.Error(it)) }
     }
