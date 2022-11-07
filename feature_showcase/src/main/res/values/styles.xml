@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Style.FetureShowcase.TextInputLayout.Location" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+       <item name="boxBackgroundColor">?attr/colorSurface</item>
+    </style>
+</resources>
