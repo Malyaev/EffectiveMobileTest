@@ -2,4 +2,6 @@
     <string name="app_name">Feature Showcase</string>
     <string name="filter">filter</string>
     <string name="search">search</string>
+    <string name="buy_now">Buy now!</string>
+    <string name="new_">new</string>
 </resources>
