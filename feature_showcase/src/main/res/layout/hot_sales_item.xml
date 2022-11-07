@@ -59,7 +59,7 @@
             />
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Style.FetureShowcase.Button.HotSales"
+            style="@style/Style.FetureShowcase.Button.Filled.HotSales"
             android:id="@+id/buyButton"
             android:layout_width="98dp"
             android:layout_height="23dp"

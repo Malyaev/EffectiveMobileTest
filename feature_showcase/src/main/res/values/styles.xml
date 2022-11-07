@@ -26,10 +26,23 @@
     <style name="Style.FetureShowcase.Button.Round.Secondary" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">@drawable/round</item>
     </style>
-
-    <style name="Style.FetureShowcase.Button.HotSales" parent="Widget.MaterialComponents.Button">
+    <style name="Style.FetureShowcase.Button.Square" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/square</item>
+    </style>
+    <style name="Style.FetureShowcase.Button.Filled.HotSales" parent="Style.FetureShowcase.Button.Filled">
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="backgroundTint">@color/white</item>
+        <item name="textAppearanceButton">@style/Style.FetureShowcase.TextAppearance.Button.HotSales</item>
+        <item name="android:textAppearance">@style/Style.FetureShowcase.TextAppearance.Button.HotSales</item>
+    </style>
+    <style name="Style.FetureShowcase.Button.Filled.Secondary">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="backgroundTint">?attr/colorSecondary</item>
+    </style>
+    <style name="Style.FetureShowcase.Button.Filled.Rounded">
+        <item name="shapeAppearanceOverlay">@style/Style.FetureShowcase.Rounded.Light</item>
+    </style>
+    <style name="Style.FetureShowcase.Button.Filled" parent="Widget.MaterialComponents.Button">
         <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">0dp</item>
         <item name="android:paddingTop">0dp</item>
@@ -37,15 +50,21 @@
         <item name="elevation">0dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
-        <item name="textAppearanceButton">@style/Style.FetureShowcase.TextAppearance.Button.HotSales</item>
-        <item name="android:textAppearance">@style/Style.FetureShowcase.TextAppearance.Button.HotSales</item>
+        <item name="textAppearanceButton">@style/Style.FetureShowcase.TextAppearance.Button</item>
+        <item name="android:textAppearance">@style/Style.FetureShowcase.TextAppearance.Button</item>
     </style>
-    <style name="Style.FetureShowcase.TextAppearance.Button.HotSales" parent="TextAppearance.MaterialComponents.Button">
+    <style name="Style.FetureShowcase.TextAppearance.Button.HotSales" parent="Style.FetureShowcase.TextAppearance.Button">
         <item name="fontFamily">@font/sfprodisplay_bold</item>
         <item name="android:fontFamily">@font/sfprodisplay_bold</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">11sp</item>
     </style>
+    <style name="Style.FetureShowcase.TextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/mark_pro</item>
+        <item name="android:fontFamily">@font/mark_pro</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
     <style name="Style.FetureShowcase.Button.TitleTextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">?attr/colorSecondary</item>
         <item name="android:paddingLeft">4dp</item>
@@ -65,6 +84,9 @@
     <style name="Style.FetureShowcase.Rounded" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
+    </style>
+    <style name="Style.FetureShowcase.Rounded.Light">
+        <item name="cornerSize">10dp</item>
     </style>
 
 </resources>
