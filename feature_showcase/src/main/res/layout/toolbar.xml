@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:menu="@menu/top_menu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
@@ -16,14 +17,12 @@
             style="@style/Style.FetureShowcase.TextInputLayout.Location"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            app:startIconDrawable="@drawable/location"
-            app:startIconTint="?attr/colorSecondary"
             >
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                style="@style/Style.FetureShowcase.MaterialAutoCompleteTextView.Location"
                 android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/colorPrimary"
                 tools:text="item"
                 />
         </com.google.android.material.textfield.TextInputLayout>

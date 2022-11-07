@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Style.FetureShowcase.TextInputLayout.Location" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-       <item name="boxBackgroundColor">?attr/colorSurface</item>
+        <item name="boxBackgroundColor">?attr/background</item>
+        <item name="startIconDrawable">@drawable/location</item>
+        <item name="startIconTint">?attr/colorSecondary</item>
+        <item name="boxStrokeWidth">0dp</item>
+    </style>
+    <style name="Style.FetureShowcase.MaterialAutoCompleteTextView.Location" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="fontFamily">@font/mark_pro_normal</item>
     </style>
 </resources>
