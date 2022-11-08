@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Style.FeatureMyCart.ButtonToggleGroup.PlusMinus"
+        parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+        <item name="strokeWidth">0dp</item>
+        <item name="backgroundTint">@color/on_primary_25</item>
+        <item name="iconTint">?attr/colorOnPrimary</item>
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.Light</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">9dp</item>
+        <item name="android:paddingRight">9dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="minHeight">0dp</item>
+        <item name="minWidth">0dp</item>
+        <item name="rippleColor">@color/on_primary_25</item>
+    </style>
+</resources>
