@@ -20,8 +20,22 @@
         <item name="chipMinHeight">0dp</item>
         <item name="chipMinTouchTargetSize">0dp</item>
         <item name="ensureMinTouchTargetSize">false</item>
-        <item name="chipIconSize">0dp</item>
-        <item name="closeIconSize">0dp</item>
+    </style>
+    <style name="Style.FeatureProduct.Chip.Color" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="checkedIcon">@drawable/check_icon</item>
+        <item name="android:checkable">true</item>
+        <item name="checkedIconVisible">true</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="iconStartPadding">4dp</item>
+    </style>
+    <style name="Style.FeatureProduct.Chip.Storage" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:checkable">true</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="iconStartPadding">4dp</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="chipBackgroundColor">@color/storage_chip_background</item>
+        <item name="android:textColor">@color/storage_chip_text</item>
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.Light</item>
     </style>
     <style name="Style.FeatureProduct.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="android:background">@drawable/square</item>

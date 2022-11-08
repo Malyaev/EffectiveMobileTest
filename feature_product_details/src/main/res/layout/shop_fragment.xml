@@ -99,7 +99,6 @@
         app:layout_constraintEnd_toEndOf="@id/cpu_icon"
         />
 
-
     <TextView
         style="@style/Style.App.TextAppearance"
         android:id="@+id/select_title"
@@ -112,5 +111,102 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="29dp"
         />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/color_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toBottomOf="@id/select_title"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="35dp"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:chipSpacingHorizontal="19dp"
+        tools:checkedChip="@android:id/checkbox"
+        >
+        <include
+            tools:id="@android:id/checkbox"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            layout="@layout/color_chip"
+            tools:ignore="true"
+            />
+        <include android:layout_height="40dp"
+            android:layout_width="40dp"
+            layout="@layout/color_chip"
+            tools:ignore="true"
+            />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/storage_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/color_chip"
+        app:layout_constraintBottom_toBottomOf="@id/color_chip"
+        android:layout_marginEnd="63dp"
+        app:chipSpacingHorizontal="11dp"
+        tools:checkedChip="@android:id/checkbox">
+
+        <include
+            tools:id="@android:id/checkbox"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            layout="@layout/storage_chip"
+            tools:ignore="true"
+            android:layout_gravity="center_vertical"
+            />
+
+        <include
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            layout="@layout/storage_chip"
+            tools:ignore="true"
+            android:layout_gravity="center_vertical"
+            />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/add_button"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="36dp"
+        android:layout_marginHorizontal="30dp"
+        app:cardElevation="0dp"
+        android:backgroundTint="?attr/colorSecondary"
+        android:clickable="true"
+        app:cardCornerRadius="10dp"
+        android:focusable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mark_pro_extra_bold"
+            android:textSize="20sp"
+            android:textColor="?attr/colorOnSecondary"
+            android:text="@string/add_to_cart"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="45dp"
+            />
+
+        <TextView
+            android:id="@+id/prise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mark_pro_extra_bold"
+            android:textSize="20sp"
+            android:textColor="?attr/colorOnSecondary"
+            tools:text="$1,500.00"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="38dp"
+            />
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
