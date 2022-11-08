@@ -27,8 +27,7 @@
         <item name="android:background">@drawable/round</item>
     </style>
     <style name="Style.App.ImageButton.Square" parent="Widget.AppCompat.ImageButton">
-        <item name="android:background">?attr/colorPrimary</item>
-        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.Light</item>
+        <item name="android:background">@drawable/square</item>
     </style>
     <style name="Style.App.Button.Filled.Secondary">
         <item name="android:textColor">?attr/colorPrimary</item>
