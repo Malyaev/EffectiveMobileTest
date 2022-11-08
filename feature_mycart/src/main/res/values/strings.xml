@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Feature My Cart</string>
+    <string name="add_address">Add address</string>
 </resources>
