@@ -1,4 +1,4 @@
-package com.yingenus.feature_showcase.presentation
+package com.yingenus.feature_showcase.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 

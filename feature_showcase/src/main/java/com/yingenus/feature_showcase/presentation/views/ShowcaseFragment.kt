@@ -1,4 +1,4 @@
-package com.yingenus.feature_showcase.presentation
+package com.yingenus.feature_showcase.presentation.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
