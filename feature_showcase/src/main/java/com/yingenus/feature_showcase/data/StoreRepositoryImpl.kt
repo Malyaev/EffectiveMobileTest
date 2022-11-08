@@ -8,7 +8,7 @@ import com.yingenus.api_network.api.dto.Showcase
 import com.yingenus.feature_showcase.domain.StoreRepository
 import com.yingenus.feature_showcase.domain.dto.BestSellerProduct
 import com.yingenus.feature_showcase.domain.dto.HomeShowcase
-import com.yingenus.feature_showcase.domain.dto.HomeStoreProduct
+import com.yingenus.feature_showcase.domain.dto.HotSalesProduct
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import com.yingenus.api_network.api.StoreRepository as ApiStoreRepository
@@ -36,7 +36,7 @@ internal class StoreRepositoryImpl @Inject constructor(val networkApi: NetworkAp
             )
 
         private fun HomeStore.toHomeStoreProduct() =
-            HomeStoreProduct(
+            HotSalesProduct(
                 id = id,
                 isBuy = is_buy,
                 isNew = is_new,

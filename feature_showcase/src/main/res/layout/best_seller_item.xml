@@ -39,7 +39,7 @@
             />
 
         <TextView
-            android:id="@+id/prise"
+            android:id="@+id/discount_prise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/mark_pro_extra_bold"

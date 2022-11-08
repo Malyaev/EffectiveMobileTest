@@ -11,6 +11,7 @@
     android:clipToPadding="false">
 
     <FrameLayout
+        android:id="@+id/image_container"
         android:layout_width="71dp"
         android:layout_height="71dp"
         android:background="@drawable/category_circle"

@@ -14,16 +14,17 @@
         android:fontFamily="@font/mark_pro_extra_bold"
         android:textSize="25sp"
         android:textColor="?attr/colorPrimary"
-        android:text="@string/select_category"
+        tools:text="Select Category"
         android:layout_gravity="start|center_vertical"
         android:layout_marginStart="17dp"
         />
 
     <androidx.appcompat.widget.AppCompatButton
         style="@style/Style.FetureShowcase.Button.TitleTextButton"
+        android:id="@+id/see_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/view_all"
+        android:text="@string/see_more"
         android:layout_gravity="end"
         android:layout_marginEnd="23dp"
         />
