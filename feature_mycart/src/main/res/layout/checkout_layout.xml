@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/colorPrimary"
+    android:layout_height="216dp"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/border"
+        android:layout_marginHorizontal="4dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <TextView
+            android:id="@+id/title_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mark_pro_light"
+            android:textSize="15sp"
+            android:text="@string/total"
+            android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="55dp"/>
+
+        <TextView
+            android:id="@+id/title_value"
+            android:layout_width="wrap_content"
+            android:minWidth="73dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mark_pro_extra_bold"
+            android:textSize="15sp"
+            tools:text="$6,000 us"
+            android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintBaseline_toBaselineOf="@id/title_total"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="35dp"/>
+
+        <TextView
+            android:id="@+id/delivery_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mark_pro_light"
+            android:textSize="15sp"
+            android:text="@string/delivery"
+            android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintStart_toStartOf="@id/title_total"
+            app:layout_constraintTop_toBottomOf="@id/title_total"
+            android:layout_marginTop="12dp"
+            />
+
+        <TextView
+            android:id="@+id/delivery_value"
+            android:layout_width="wrap_content"
+            android:minWidth="73dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mark_pro_extra_bold"
+            android:textSize="15sp"
+            tools:text="Free"
+            android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintBaseline_toBaselineOf="@id/delivery_title"
+            app:layout_constraintStart_toStartOf="@id/title_value"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/border"
+        android:layout_marginHorizontal="4dp"/>
+    
+    <com.google.android.material.button.MaterialButton
+        style="@style/Style.FeatureMyCart.Button.Checkout"
+        android:backgroundTint="?attr/colorSecondary"
+        android:layout_width="match_parent"
+        android:text="@string/checkout"
+        android:layout_height="54dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginHorizontal="44dp"/>
+
+</LinearLayout>

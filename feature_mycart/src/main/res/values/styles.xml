@@ -15,4 +15,14 @@
         <item name="minWidth">0dp</item>
         <item name="rippleColor">@color/on_primary_25</item>
     </style>
+    <style name="Style.FeatureMyCart.Button.Checkout" parent="Style.App.Button.Filled.Rounded">
+        <item name="android:textAppearance">@style/Style.FeatureMyCart.TextAppearance.Button</item>
+    </style>
+    <style name="Style.FeatureMyCart.TextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/mark_pro_extra_bold</item>
+        <item name="android:fontFamily">@font/mark_pro_extra_bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>
