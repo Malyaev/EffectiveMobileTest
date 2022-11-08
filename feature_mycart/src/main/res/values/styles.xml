@@ -18,6 +18,9 @@
     <style name="Style.FeatureMyCart.Button.Checkout" parent="Style.App.Button.Filled.Rounded">
         <item name="android:textAppearance">@style/Style.FeatureMyCart.TextAppearance.Button</item>
     </style>
+    <style name="Style.FeatureMyCart.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">@style/Style.FeatureMyCart.TextAppearance.Button</item>
+    </style>
     <style name="Style.FeatureMyCart.TextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="fontFamily">@font/mark_pro_extra_bold</item>
         <item name="android:fontFamily">@font/mark_pro_extra_bold</item>
