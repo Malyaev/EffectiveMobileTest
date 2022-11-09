@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.yingenus.feature_showcase.R
@@ -110,7 +111,19 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
             getHotSalesContainerAdapterDelegate(hotSalesAdapter)
         )
 
-        storeRecycler!!.adapter = storeAdapter
+        storeRecycler!!.adapter = StoreAdapter({
+            when(it){
+                hotSalesHeader -> viewAllHotSale()
+                bestSellerHeader -> viewAllBestSeller()
+            }
+        },{
+            openBestSeller(it)
+        },{ bestseller, licked ->
+            showCaseViewModel.likeBestSeller(bestseller, licked)
+        },hotSalesAdapter)
+        storeRecycler!!.layoutManager = GridLayoutManager(requireContext(),2).apply {
+            spanSizeLookup = StoreAdapter.HotSalesSizeLookup(storeRecycler!!)
+        }
 
         val categoryAdapter = ListDelegationAdapter<List<CategoryItem>>(
             getCategoryAdapterDelegate {
@@ -134,7 +147,6 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
         categoryRecycler = null
         storeRecycler = null
     }
-
 
     private fun subscribeToViewModel(){
         lifecycleScope.launchWhenStarted {
