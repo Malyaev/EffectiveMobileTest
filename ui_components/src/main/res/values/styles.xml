@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Style.App.SheetDialog.Rounded" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Style.App.AppModalStyle</item>
+    </style>
+    <style name="Style.App.AppModalStyle" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.Top</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+    </style>
     <style name="Style.App.TextInputLayout.OnBackground" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxStrokeWidth">0dp</item>
         <item name="backgroundTint">?attr/colorSurface</item>
@@ -27,8 +35,7 @@
         <item name="android:background">@drawable/round</item>
     </style>
     <style name="Style.App.ImageButton.Square" parent="Widget.AppCompat.ImageButton">
-        <item name="android:background">?attr/colorPrimary</item>
-        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.Light</item>
+        <item name="android:background">@drawable/square</item>
     </style>
     <style name="Style.App.Button.Filled.Secondary">
         <item name="android:textColor">?attr/colorPrimary</item>
@@ -82,6 +89,12 @@
     </style>
     <style name="Style.App.Rounded.ExtraLight">
         <item name="cornerSize">5dp</item>
+    </style>
+    <style name="Style.App.Rounded.Top" parent="">
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
 </resources>
