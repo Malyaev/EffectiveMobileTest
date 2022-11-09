@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feature_my_cart_navigetion"
+    app:startDestination="@id/main_my_cart">
+
+    <fragment
+        android:id="@+id/main_my_cart"
+        android:name="com.yingenus.feature_mycart.presentation.view.MyCartFragment"
+        tools:layout="@layout/my_cart_fragment"
+        >
+        <deepLink
+            app:uri="App://feature_my_chart/"
+            />
+
+    </fragment>
+
+</navigation>
