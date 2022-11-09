@@ -2,7 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/feature_showcase_navigation">
+    android:id="@+id/feature_showcase_navigation"
+    app:startDestination="@id/main_showcase">
 
     <fragment
         android:id="@+id/main_showcase"
