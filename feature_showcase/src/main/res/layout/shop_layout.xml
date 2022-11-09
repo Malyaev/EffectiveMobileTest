@@ -41,6 +41,7 @@
                         layout="@layout/title_item"/>
 
                     <view class="androidx.recyclerview.widget.RecyclerView"
+                        android:id="@+id/category_recycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -62,7 +63,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/expanded_recyclerview"
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="?android:colorBackground"

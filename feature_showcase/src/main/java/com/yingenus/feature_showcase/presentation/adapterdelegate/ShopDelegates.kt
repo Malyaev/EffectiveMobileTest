@@ -1,5 +1,6 @@
 package com.yingenus.feature_showcase.presentation.adapterdelegate
 
+import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.widget.Button
 import android.widget.ImageButton
@@ -58,4 +59,9 @@ internal fun getHotSalesContainerAdapterDelegate(
 = adapterDelegate<HotSalesContainer, ShopItem>(R.layout.hot_sales_item_container){
     val recycler : RecyclerView = findViewById(R.id.recycler)
     recycler.adapter = hotSalesItemAdapter
+
+    bind {
+        hotSalesItemAdapter.items = item.hotSalesItem
+        hotSalesItemAdapter.notifyDataSetChanged()
+    }
 }

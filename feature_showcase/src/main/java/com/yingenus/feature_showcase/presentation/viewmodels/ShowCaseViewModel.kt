@@ -37,6 +37,7 @@ internal class ShowCaseViewModel  @Inject constructor(
     val error : StateFlow<String?>
         get() = _error.asStateFlow()
 
+    private var categoryList: List<Category> = emptyList()
     private val _categoriesStateFlow: MutableStateFlow<List<Category>>
         = MutableStateFlow( emptyList() )
     val categories : StateFlow<List<Category>>
@@ -85,7 +86,15 @@ internal class ShowCaseViewModel  @Inject constructor(
             .launchIn(viewModelScope)
     }
     fun categorySelected( category: Category){
-        //TODO()
+        viewModelScope.launch {
+            val updatedCategories = categoryList.map {
+                if (it == category) Category(it.category,isSelected = true)
+                else if (it.isSelected) Category(it.category, false)
+                else category
+            }
+            categoryList = updatedCategories
+            _categoriesStateFlow.emit(categoryList)
+        }
     }
 
     fun likeBestSeller( bestSeller: BestSeller, isLicked : Boolean){
@@ -101,7 +110,9 @@ internal class ShowCaseViewModel  @Inject constructor(
     }
 
     fun setLocation(location: Location){
-        //TODO()
+        viewModelScope.launch {
+            _selectedLocation.emit(location)
+        }
     }
 
 }
