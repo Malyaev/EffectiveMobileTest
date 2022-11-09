@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@layout/splash_layout">
+
+    <include
+        app:grapt="@navigation/feature_my_cart_navigation"
+        />
+    <include
+        app:grapt="@navigation/feature_product_navigation"
+        />
+    <include
+        app:grapt="@navigation/feature_showcase_navigation"
+        />
+
+    <fragment
+        android:id="@+id/splash_fragment"
+        android:name="com.yingenus.effectivemobiletest.presintation.SplashFragment"
+        tools:layout="@layout/splash_layout">
+        <action
+            android:id="@+id/splash_fragment_to_main"
+            app:destination="@id/feature_showcase_navigation"
+            />
+    </fragment>
+</navigation>
