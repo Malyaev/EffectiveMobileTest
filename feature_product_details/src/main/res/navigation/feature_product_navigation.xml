@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/feature_product_navigation">
+    android:id="@+id/feature_product_navigation"
+    app:startDestination="@+id/main_product">
 
     <fragment
         android:id="@+id/main_product"
