@@ -17,3 +17,14 @@ fun Int.convertPrise(
                 })
                 .format(this)
 }
+
+fun Int.convertPrise(
+    currencyString: String = "",
+    afterNullDigs: Int = 0,
+    currencyShot : String = ""
+): String{
+    return convertPrise(currencyString,afterNullDigs).let {
+        if (currencyShot.isNotEmpty()) it +" "+ currencyShot
+        else it
+    }
+}

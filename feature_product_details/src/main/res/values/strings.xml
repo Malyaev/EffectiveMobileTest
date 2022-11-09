@@ -5,4 +5,5 @@
     <string name="feature">Feature</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="product_details">Product Details</string>
+    <style name="storage_size">%1$s GB</style>
 </resources>

@@ -28,6 +28,7 @@
             />
 
         <ImageButton
+            android:id="@+id/like"
             style="@style/Style.FeatureProduct.ImageButton.Square"
             android:layout_width="37dp"
             android:layout_height="37dp"
@@ -75,27 +76,30 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/background"
+            android:background="?attr/colorSurface"
             app:layout_constraintTop_toBottomOf="@+id/stars"
             android:layout_marginTop="20dp"
             android:layout_marginHorizontal="27dp"
             >
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/shop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/shop"/>
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/details"/>
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/feature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/feature"/>
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
+            android:id="@+id/details_pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout_height="200dp"

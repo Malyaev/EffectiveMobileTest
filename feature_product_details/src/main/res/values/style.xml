@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Style.FeatureProduct.BottomSheet" parent="@style/Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.Top</item>
+    </style>
     <style name="Style.FeatureProduct.ImageButton.Square" parent="Style.App.ImageButton.Square">
         <item name="android:background">@drawable/square</item>
     </style>

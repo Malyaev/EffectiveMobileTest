@@ -25,7 +25,7 @@
             />
 
         <ImageButton
-            android:id="@+id/chart"
+            android:id="@+id/cart"
             style="@style/Style.FeatureProduct.ImageButton.Square"
             android:layout_width="37dp"
             android:layout_height="37dp"
