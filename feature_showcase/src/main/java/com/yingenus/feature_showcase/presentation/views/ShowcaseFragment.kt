@@ -15,6 +15,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.yingenus.feature_showcase.R
@@ -41,7 +43,7 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
     private var categoryRecycler : RecyclerView? = null
     private var storeRecycler : RecyclerView? = null
 
-    private var locationHelper: LocationHelper? = null
+    private var locationHelper: AutoCompleteTextViewHelper<Location>? = null
 
     private val hotSalesHeader = Header(getString(R.string.hot_sales))
     private val bestSellerHeader = Header(getString(R.string.best_seller))
@@ -49,8 +51,8 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
     @Inject
     lateinit var showCaseViewModelFactory: ShowCaseViewModel.ShowCaseViewModelFactory
 
-    private val componentViewModel : ComponentViewModel by viewModels()
-    private val showCaseViewModel : ShowCaseViewModel by viewModels<ShowCaseViewModel> {
+    private val componentViewModel : ComponentViewModel by navGraphViewModels(R.id.main_showcase)
+    private val showCaseViewModel : ShowCaseViewModel by navGraphViewModels<ShowCaseViewModel>(R.id.main_showcase) {
         componentViewModel.getFeatureComponent().injectShowFragment(this)
         showCaseViewModelFactory
     }
@@ -77,7 +79,9 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
             } else false
         }
 
-        locationHelper = LocationHelper(locationView!!)
+        locationHelper = AutoCompleteTextViewHelper<Location>(locationView!!){
+                it.name
+            }
             .also {
                 it.init(requireContext())
                 it.onItemSelected {
@@ -160,13 +164,13 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
         lifecycleScope.launchWhenStarted {
             showCaseViewModel.locations
                 .onEach {
-                    locationHelper!!.setLocations(it)
+                    locationHelper!!.setItems(it)
                 }.collect()
         }
         lifecycleScope.launchWhenStarted {
             showCaseViewModel.selectedLocation
                 .onEach {
-                    it?.let {  locationHelper!!.selectLocation(it)}
+                    it?.let {  locationHelper!!.selectItem(it)}
                 }.collect()
         }
         lifecycleScope.launchWhenStarted {
@@ -196,7 +200,7 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
     }
 
     private fun openFilters(){
-
+        findNavController().navigate(R.id.showcase_open_filters)
     }
 
     private fun openBestSeller(bestSeller: BestSeller){

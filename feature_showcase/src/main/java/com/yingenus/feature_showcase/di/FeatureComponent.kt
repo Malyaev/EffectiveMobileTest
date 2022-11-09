@@ -1,5 +1,6 @@
 package com.yingenus.feature_showcase.di
 
+import com.yingenus.feature_showcase.presentation.views.FilterDialog
 import com.yingenus.feature_showcase.presentation.views.ShowcaseFragment
 import dagger.Component
 
@@ -13,4 +14,5 @@ internal abstract class FeatureComponent {
     }
 
     abstract fun injectShowFragment(showcaseFragment: ShowcaseFragment)
+    abstract fun injectFiltersDialog(filterDialog: FilterDialog)
 }

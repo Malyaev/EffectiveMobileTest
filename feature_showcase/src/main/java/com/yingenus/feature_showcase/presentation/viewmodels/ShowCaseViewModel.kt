@@ -105,7 +105,7 @@ internal class ShowCaseViewModel  @Inject constructor(
         //TODO()
     }
 
-    fun setFilter( brand: FilterOption.Brand, prise: FilterOption.Prise, size: FilterOption.Size){
+    fun setFilter( brand: FilterOption.Brand?, prise: FilterOption.Prise?, size: FilterOption.Size?){
         //TODO()
     }
 

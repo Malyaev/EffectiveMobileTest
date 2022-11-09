@@ -8,47 +8,51 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import com.yingenus.feature_showcase.domain.dto.Location
 
-internal class LocationHelper(val autoCompleteTextView: AutoCompleteTextView){
+internal class AutoCompleteTextViewHelper<T>(val autoCompleteTextView: AutoCompleteTextView,private val toString : (T) -> String){
 
-    private var locationList: List<Location> = emptyList()
-    private var onSelected : ((Location) -> Unit)? = null
+    private var itemList : List<T> = emptyList()
+    private var onSelected : ((T) -> Unit)? = null
+    private var onNotSelected : (() -> Unit)? = null
 
     fun init(context: Context){
         autoCompleteTextView.setAdapter(ArrayAdapter<String>(context,android.R.layout.simple_dropdown_item_1line))
-    }
-
-    fun setLocations(locations : List<Location>){
-        locationList = emptyList()
-        val adapter = autoCompleteTextView.adapter as ArrayAdapter<String>
-        adapter.clear()
-        adapter.addAll(locations.map { it.name })
         autoCompleteTextView.onItemSelectedListener = object : OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 onSelected?.let { on ->
-                    getSelectedLocation()?.let { on.invoke(it) }
+                    getSelectedItem()?.let { on.invoke(it) }
                 }
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                //TODO("Not yet implemented")
+                onNotSelected?.invoke()
             }
         }
     }
 
-    fun selectLocation(location: Location){
-        if (!locationList.any { it.name == location.name }){
-            locationList = locationList + location
+    fun setItems(items : List<T>){
+        itemList = emptyList()
+        val adapter = autoCompleteTextView.adapter as ArrayAdapter<String>
+        adapter.clear()
+        adapter.addAll(itemList.map { toString.invoke(it) })
+    }
+
+    fun selectItem(item: T){
+        if (!itemList.any { toString.invoke(it) == toString.invoke(item) }){
+            itemList = itemList + item
         }
-        autoCompleteTextView.setText(location.name)
+        autoCompleteTextView.setText(toString.invoke(item))
     }
 
-    fun getSelectedLocation():Location?{
-        val locationName = autoCompleteTextView.text.toString()
-        return locationList.find { it.name == locationName }
+    fun getSelectedItem():T?{
+        val line = autoCompleteTextView.text.toString()
+        return itemList.find { toString.invoke(it) == line }
     }
 
-    fun onItemSelected(on : (Location) -> Unit){
+    fun onItemSelected(on : (T) -> Unit){
         onSelected = on
+    }
+    fun onNothingSelected( on : ()-> Unit){
+        onNotSelected = on
     }
 
 }

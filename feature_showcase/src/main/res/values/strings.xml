@@ -14,4 +14,5 @@
     <string name="select_category">Select Category</string>
     <string name="hot_sales">Hot sales</string>
     <string name="best_seller">Best Seller</string>
+    <string name="sizes"> %%.1f%n to %%.1f%n inches</string>
 </resources>

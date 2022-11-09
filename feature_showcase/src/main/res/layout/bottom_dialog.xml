@@ -23,6 +23,7 @@
 
     <ImageButton
         style="@style/Style.FetureShowcase.Button.Square"
+        android:id="@+id/close"
         android:layout_width="37dp"
         android:layout_height="37dp"
         android:src="@drawable/clouse"
@@ -35,6 +36,7 @@
 
     <com.google.android.material.button.MaterialButton
         style="@style/Style.FetureShowcase.Button.Filled.Rounded"
+        android:id="@+id/done"
         android:layout_width="86dp"
         android:layout_height="37dp"
         android:backgroundTint="?attr/colorSecondary"
