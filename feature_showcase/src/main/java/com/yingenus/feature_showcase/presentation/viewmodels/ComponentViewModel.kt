@@ -7,8 +7,18 @@ import com.yingenus.feature_showcase.di.FeatureShowcaseComponentHolder
 
 internal class ComponentViewModel : ViewModel() {
 
+    @Volatile
+    private var featureComponent: FeatureComponent? = null
+
     fun getFeatureComponent(): FeatureComponent{
-        return FeatureShowcaseComponentHolder.getFeatureComponent()
+        if (featureComponent == null){
+            synchronized(ComponentViewModel::class){
+                if (featureComponent == null){
+                    featureComponent = FeatureShowcaseComponentHolder.getFeatureComponent()
+                }
+            }
+        }
+        return featureComponent!!
     }
 
 }
