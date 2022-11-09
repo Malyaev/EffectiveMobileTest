@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feature_showcase_navigation">
+
+    <fragment
+        android:id="@+id/main_showcase"
+        android:name="com.yingenus.feature_showcase.presentation.views.ShowcaseFragment"
+        tools:layout="@layout/shop_layout"
+        >
+        <action
+            android:id="@+id/showcase_open_filters"
+            app:destination="@id/filter_dialog"
+            />
+        <deepLink
+            app:uri="feature_showcase.yingenus.com/showcase"
+            />
+
+    </fragment>
+
+    <dialog
+        android:id="@+id/filter_dialog"
+        android:name="com.yingenus.feature_showcase.presentation.views.FilterDialog"
+        tools:layout="@layout/bottom_dialog"
+        >
+    </dialog>
+
+</navigation>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="12dp"
+    android:clipToPadding="false">
+
+    <FrameLayout
+        android:id="@+id/image_container"
+        android:layout_width="71dp"
+        android:layout_height="71dp"
+        android:background="@drawable/category_circle"
+        android:elevation="3dp"
+        >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            tools:src="@drawable/books"
+            app:tint="@color/category_icon"
+            android:layout_gravity="center"
+            />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:maxWidth="71dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/category_text"
+        android:layout_gravity="center"
+        android:fontFamily="@font/mark_pro_normal"
+        android:textSize="15sp"
+        tools:text ="phone"/>
+
+</LinearLayout>
