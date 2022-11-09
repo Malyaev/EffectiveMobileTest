@@ -3,8 +3,8 @@ package com.yingenus.feature_mycart.data
 import android.net.Uri
 import com.yingenus.api_network.api.NetworkApi
 import com.yingenus.core.Result
-import com.yingenus.feature_mycart.domain.CartRepository
-import com.yingenus.feature_mycart.domain.dto.BasketItem
+import com.yingenus.feature_mycart.domain.repository.CartRepository
+import com.yingenus.feature_mycart.domain.dto.BasketProduct
 import com.yingenus.feature_mycart.domain.dto.Cart
 import com.yingenus.feature_mycart.domain.dto.Delivery
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +15,7 @@ import com.yingenus.api_network.api.dto.Basket as ApiBasket
 
 internal class CartRepositoryImpl @Inject constructor(
     private val networkApi: NetworkApi
-    ): CartRepository{
+    ): CartRepository {
 
     companion object{
         private fun ApiCart.toCart() =
@@ -27,11 +27,12 @@ internal class CartRepositoryImpl @Inject constructor(
             )
 
         private fun ApiBasket.toBasketItem() =
-            BasketItem(
+            BasketProduct(
                 id = id,
                 images = Uri.parse(images),
                 price = price,
-                title = title
+                title = title,
+                number = 1
             )
 
         private fun String.getDelivery(): Delivery{

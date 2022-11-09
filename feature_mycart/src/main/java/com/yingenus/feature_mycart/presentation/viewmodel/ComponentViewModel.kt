@@ -1,4 +1,4 @@
-package com.yingenus.feature_mycart.presentation.adapteritem
+package com.yingenus.feature_mycart.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.yingenus.feature_mycart.di.FeatureMyCartComponent

@@ -1,10 +1,10 @@
-package com.yingenus.feature_mycart.presentation.adapteritem
+package com.yingenus.feature_mycart.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.yingenus.feature_mycart.domain.CartRepository
-import com.yingenus.feature_mycart.domain.dto.BasketItem
+import com.yingenus.feature_mycart.domain.repository.CartRepository
+import com.yingenus.feature_mycart.domain.dto.BasketProduct
 import com.yingenus.feature_mycart.domain.dto.Cart
 import com.yingenus.feature_mycart.domain.dto.Delivery
 import kotlinx.coroutines.flow.*
@@ -27,8 +27,8 @@ internal class MyCartViewModel @Inject constructor(
         }
     }
 
-    private val _basketItems : MutableStateFlow<List<BasketItem>> = MutableStateFlow(emptyList())
-    val basketItem : StateFlow<List<BasketItem>>
+    private val _basketItems : MutableStateFlow<List<BasketProduct>> = MutableStateFlow(emptyList())
+    val basketItem : StateFlow<List<BasketProduct>>
         get() = _basketItems.asStateFlow()
 
     private val _delivery : MutableStateFlow<Delivery> = MutableStateFlow(Delivery.Prise(0))
@@ -61,15 +61,15 @@ internal class MyCartViewModel @Inject constructor(
         _basketItems.emit(cart.basket)
     }
 
-    fun deleteBasketItem(basketItem: BasketItem){
+    fun deleteBasketItem(basketItem: BasketProduct){
 
     }
 
-    fun addItemFromBasketItem(basketItem: BasketItem, number: Int){
+    fun addItemFromBasketItem(basketItem: BasketProduct, number: Int){
 
     }
 
-    fun deleteItemFromBasketItem(basketItem: BasketItem, number: Int){
+    fun deleteItemFromBasketItem(basketItem: BasketProduct, number: Int){
 
     }
 

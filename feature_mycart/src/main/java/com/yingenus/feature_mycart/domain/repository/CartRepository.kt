@@ -1,4 +1,4 @@
-package com.yingenus.feature_mycart.domain
+package com.yingenus.feature_mycart.domain.repository
 
 import com.yingenus.core.Result
 import com.yingenus.feature_mycart.domain.dto.Cart

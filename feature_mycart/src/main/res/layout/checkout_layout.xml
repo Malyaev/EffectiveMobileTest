@@ -31,7 +31,7 @@
             android:layout_marginStart="55dp"/>
 
         <TextView
-            android:id="@+id/title_value"
+            android:id="@+id/total_value"
             android:layout_width="wrap_content"
             android:minWidth="73dp"
             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
             tools:text="Free"
             android:textColor="?attr/colorOnPrimary"
             app:layout_constraintBaseline_toBaselineOf="@id/delivery_title"
-            app:layout_constraintStart_toStartOf="@id/title_value"
+            app:layout_constraintStart_toStartOf="@id/total_value"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

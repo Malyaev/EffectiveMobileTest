@@ -62,6 +62,8 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:background="@drawable/rounded_background"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
             tools:itemCount="2"
             tools:listitem="@layout/basket_item"
             />
