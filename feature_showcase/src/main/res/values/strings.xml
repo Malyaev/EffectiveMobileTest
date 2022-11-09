@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Feature Showcase</string>
+    <string name="filter">filter</string>
+    <string name="search">search</string>
+    <string name="buy_now">Buy now!</string>
+    <string name="new_">new</string>
+    <string name="filter_options">Filter options</string>
+    <string name="done">Done</string>
+    <string name="brand">Brand</string>
+    <string name="prise">Prise</string>
+    <string name="size">Size</string>
+    <string name="see_more">see more</string>
+    <string name="view_all">view all</string>
+    <string name="select_category">Select Category</string>
+    <string name="hot_sales">Hot sales</string>
+    <string name="best_seller">Best Seller</string>
+    <string name="sizes"> %%.1f%n to %%.1f%n inches</string>
 </resources>

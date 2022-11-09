@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip
+    style="@style/Style.FeatureProduct.Chip.Star"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="18dp"
+    android:layout_height="18dp"
+    app:chipIconSize="18dp"
+    app:chipIconEnabled="true"
+
+    >
+
+</com.google.android.material.chip.Chip>

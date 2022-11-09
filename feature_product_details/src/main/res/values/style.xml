@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Style.FeatureProduct.BottomSheet" parent="@style/Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.Top</item>
+    </style>
+    <style name="Style.FeatureProduct.ImageButton.Square" parent="Style.App.ImageButton.Square">
+        <item name="android:background">@drawable/square</item>
+    </style>
+    <style name="Style.FeatureProduct.Chip.Star" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:checkable">false</item>
+        <item name="chipIcon">@drawable/star</item>
+        <item name="chipBackgroundColor">@android:color/transparent</item>
+        <item name="chipSurfaceColor">@android:color/transparent</item>
+        <item name="chipIconEnabled">true</item>
+        <item name="chipStartPadding">0dp</item>
+        <item name="textStartPadding">0dp</item>
+        <item name="textEndPadding">0dp</item>
+        <item name="iconStartPadding">0dp</item>
+        <item name="iconEndPadding">0dp</item>
+        <item name="closeIconStartPadding">0dp</item>
+        <item name="closeIconEndPadding">0dp</item>
+        <item name="chipEndPadding">0dp</item>
+        <item name="chipMinHeight">0dp</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+    </style>
+    <style name="Style.FeatureProduct.Chip.Color" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="checkedIcon">@drawable/check_icon</item>
+        <item name="android:checkable">true</item>
+        <item name="checkedIconVisible">true</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="iconStartPadding">4dp</item>
+    </style>
+    <style name="Style.FeatureProduct.Chip.Storage" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:checkable">true</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="iconStartPadding">4dp</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="chipBackgroundColor">@color/storage_chip_background</item>
+        <item name="android:textColor">@color/storage_chip_text</item>
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded.Light</item>
+    </style>
+    <style name="Style.FeatureProduct.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@drawable/square</item>
+        <item name="tabIndicatorColor">?attr/colorSecondary</item>
+        <item name="tabTextAppearance">@style/Style.FeatureProduct.TextAppearance.Bold</item>
+        <item name="tabIndicator">@drawable/tab_indicator</item>
+        <item name="tabIndicatorFullWidth">true</item>
+        <item name="tabMinWidth">86dp</item>
+        <item name="tabPaddingStart">16dp</item>
+        <item name="tabPaddingEnd">16dp</item>
+
+    </style>
+    <style name="Style.FeatureProduct.TextAppearance" parent="Style.App.TextAppearance"/>
+    <style name="Style.FeatureProduct.TextAppearance.Bold">
+        <item name="fontFamily">@font/mark_pro_extra_bold</item>
+        <item name="android:fontFamily">@font/mark_pro_extra_bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="Style.FeatureProduct.TextAppearance.Light">
+        <item name="fontFamily">@font/mark_pro_light</item>
+        <item name="android:fontFamily">@font/mark_pro_light</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="Style.FeatureProduct.TextAppearance.Light.DeviseInfo">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">?attr/devise_info_color</item>
+    </style>
+</resources>

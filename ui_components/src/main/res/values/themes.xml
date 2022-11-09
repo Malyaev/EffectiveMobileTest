@@ -19,5 +19,7 @@
         <item name="android:colorBackground">@color/light_gray</item>
 
         <item name="android:textAppearance">@style/Style.App.TextAppearance</item>
+
+        <item name="bottomSheetDialogTheme">@style/Style.App.SheetDialog.Rounded</item>
     </style>
 </resources>
