@@ -2,9 +2,11 @@ package com.yingenus.api_network.di
 
 import android.content.Context
 import com.yingenus.api_network.api.CartRepository
+import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.api_network.api.ProductRepository
 import com.yingenus.api_network.api.StoreRepository
 import com.yingenus.api_network.data.Retrofit.RetrofitRepository
+import com.yingenus.api_network.data.image.GlideImageLoader
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -19,5 +21,7 @@ internal abstract class RepositoryModule {
     abstract fun provideProductRepository( retrofitRepository: RetrofitRepository): ProductRepository
     @Binds
     abstract fun provideStoreRepository( retrofitRepository: RetrofitRepository): StoreRepository
+    @Binds
+    abstract fun provideImageLoader( glideImageLoader: GlideImageLoader): ImageLoader
 
 }

@@ -7,11 +7,11 @@ object NetworkApiHolder {
     @Volatile
     private var networkApi : NetworkApi? = null;
 
-    fun init(){
+    fun init(dependency: NetworkDependency){
         if (networkApi == null){
             synchronized(NetworkApiHolder::class){
                 if (networkApi == null){
-                    networkApi = NetworkComponent.initAndGet()
+                    networkApi = NetworkComponent.initAndGet(dependency)
                 }
             }
         }

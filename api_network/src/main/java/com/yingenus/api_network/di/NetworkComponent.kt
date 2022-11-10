@@ -6,6 +6,7 @@ import javax.inject.Singleton
 
 @Component(
     modules = [RepositoryModule::class],
+    dependencies = [NetworkDependency::class]
 )
 @Singleton
 internal abstract class NetworkComponent : NetworkApi{
@@ -13,7 +14,7 @@ internal abstract class NetworkComponent : NetworkApi{
         @Volatile
         private var networkComponent : NetworkComponent? = null
 
-        fun initAndGet(): NetworkComponent{
+        fun initAndGet( dependency: NetworkDependency): NetworkComponent{
             if (networkComponent == null){
                 synchronized(NetworkComponent::class){
                     if (networkComponent == null){
