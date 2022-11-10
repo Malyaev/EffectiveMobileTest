@@ -14,10 +14,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "EffectiveMobileTest"
 include ':app'
-include ':ui_components'
 include ':api_network'
 include ':api_database'
 include ':feature_showcase'
 include ':feature_product_details'
 include ':feature_mycart'
 include ':core'
+include ':ui_components'

@@ -3,16 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@layout/splash_layout">
+    app:startDestination="@id/splash_fragment"
+    tools:ignore="InvalidNavigation">
 
     <include
-        app:grapt="@navigation/feature_my_cart_navigation"
+        app:graph="@navigation/feature_my_cart_navigation"
+        
         />
     <include
-        app:grapt="@navigation/feature_product_navigation"
+        app:graph="@navigation/feature_product_navigation"
+
         />
     <include
-        app:grapt="@navigation/feature_showcase_navigation"
+        app:graph="@navigation/feature_showcase_navigation"
+
         />
 
     <fragment

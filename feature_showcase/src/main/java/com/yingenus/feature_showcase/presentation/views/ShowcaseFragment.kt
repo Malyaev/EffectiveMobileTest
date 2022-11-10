@@ -1,16 +1,15 @@
 package com.yingenus.feature_showcase.presentation.views
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.Button
 import android.widget.EditText
-import android.widget.Toolbar
+import android.widget.ImageButton
+import androidx.core.view.children
+import androidx.core.view.get
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputLayout
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.yingenus.feature_showcase.R
 import com.yingenus.feature_showcase.domain.dto.Location
@@ -46,8 +46,8 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
 
     private var locationHelper: AutoCompleteTextViewHelper<Location>? = null
 
-    private val hotSalesHeader = Header(getString(R.string.hot_sales))
-    private val bestSellerHeader = Header(getString(R.string.best_seller))
+    private val hotSalesHeader by lazy { Header(getString(R.string.hot_sales)) }
+    private val bestSellerHeader by lazy { Header(getString(R.string.best_seller))}
 
     @Inject
     lateinit var showCaseViewModelFactory: ShowCaseViewModel.ShowCaseViewModelFactory
@@ -65,15 +65,17 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
     ): View {
         val view =  super.onCreateView(inflater, container, savedInstanceState)!!
 
-        locationView = view.findViewById(R.id.location)
+        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.top_toolbar)
+
+        locationView = toolbar.findViewById(R.id.location_select)
         categoryRecycler = view.findViewById(R.id.category_recycler)
         storeRecycler = view.findViewById(R.id.recycler)
 
-        view.findViewById<Button>(R.id.qrButton).setOnClickListener { scanQr() }
+        view.findViewById<ImageButton>(R.id.qrButton).setOnClickListener { scanQr() }
         view.findViewById<EditText>(R.id.search_view).addTextChangedListener {
             showCaseViewModel.searchQuery(it.toString())
         }
-        view.findViewById<Toolbar>(R.id.top_toolbar).setOnMenuItemClickListener {
+        toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.filter){
                 openFilters()
                 true
@@ -94,21 +96,6 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
             getHotSalesAdapterDelegate {
                 openHotSale(it)
             }
-        )
-
-        val storeAdapter = ListDelegationAdapter<List<ShopItem>>(
-            getHeaderAdapterDelegate {
-                when(it){
-                    hotSalesHeader -> viewAllHotSale()
-                    bestSellerHeader -> viewAllBestSeller()
-                }
-            },
-            getBestSalterAdapterDelegate({
-                openBestSeller(it)
-            },{ bestseller, licked ->
-                showCaseViewModel.likeBestSeller(bestseller, licked)
-            }),
-            getHotSalesContainerAdapterDelegate(hotSalesAdapter)
         )
 
         storeRecycler!!.adapter = StoreAdapter({
@@ -133,11 +120,14 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
 
         categoryRecycler!!.adapter = categoryAdapter
 
+        subscribeToViewModel()
+
         return view
     }
 
     override fun onStart() {
         super.onStart()
+        showCaseViewModel.updateViewModel()
     }
 
     override fun onDestroyView() {

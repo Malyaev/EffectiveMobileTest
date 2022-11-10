@@ -9,9 +9,9 @@ import com.yingenus.api_network.api.dto.Product
 import com.yingenus.api_network.api.dto.Showcase
 import com.yingenus.api_network.di.MockyRetrofit
 import com.yingenus.core.Result
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -23,23 +23,26 @@ internal class RetrofitRepository @Inject constructor(@MockyRetrofit val retrofi
     }
 
     override fun getBasket(): Flow<Result<Cart>> {
-        return mockyIoService
-            .getCart()
+        return flow {
+                emit(mockyIoService.getCart().execute().body())
+            }
             .map { it?.let { Result.Success(it) }?: Result.Empty() }
-            .catch { emit(Result.Error(it)) }
+            .catch { emit(Result.Error(it)) }.flowOn(Dispatchers.IO)
     }
 
     override fun getProduct(id: Int): Flow<Result<Product>> {
-        return mockyIoService
-            .getProduct()
+        return flow {
+                emit(mockyIoService.getProduct().execute().body())
+            }
             .map { it?.let { Result.Success(it) }?: Result.Empty() }
-            .catch { emit(Result.Error(it)) }
+            .catch { emit(Result.Error(it)) }.flowOn(Dispatchers.IO)
     }
 
     override fun getShowcase(): Flow<Result<Showcase>> {
-        return mockyIoService
-            .getShowcase()
+        return flow {
+                emit(mockyIoService.getShowcase().execute().body())
+            }
             .map { it?.let { Result.Success(it) }?: Result.Empty() }
-            .catch { emit(Result.Error(it)) }
+            .catch { emit(Result.Error(it)) }.flowOn(Dispatchers.IO)
     }
 }

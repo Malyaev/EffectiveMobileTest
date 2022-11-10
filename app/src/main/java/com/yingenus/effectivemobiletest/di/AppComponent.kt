@@ -2,12 +2,12 @@ package com.yingenus.effectivemobiletest.di
 
 import dagger.Component
 
-@Component
+@Component(modules = [InitializerModule::class])
 abstract class AppComponent {
 
     companion object{
         fun initAndGet(): AppComponent{
-            TODO()
+            return DaggerAppComponent.builder().build()
         }
     }
 

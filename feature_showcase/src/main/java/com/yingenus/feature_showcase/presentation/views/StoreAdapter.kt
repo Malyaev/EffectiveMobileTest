@@ -29,7 +29,7 @@ internal class StoreAdapter(
                     is Header -> (recyclerView.layoutManager as GridLayoutManager).spanCount
                     is BestSeller -> 1
                     is List<*> -> (recyclerView.layoutManager as GridLayoutManager).spanCount
-                    else -> throw RuntimeException()
+                    else -> (recyclerView.layoutManager as GridLayoutManager).spanCount
                 }
             }?: throw RuntimeException()
         }

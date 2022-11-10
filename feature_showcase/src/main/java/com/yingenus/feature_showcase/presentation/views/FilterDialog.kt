@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ViewSwitcher.ViewFactory
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -54,18 +55,21 @@ internal class FilterDialog : BottomSheetDialogFragment(R.layout.bottom_dialog) 
         ) {
             it.name
         }
+        filterBrandHelper!!.init(requireContext())
         filterPriseHelper = AutoCompleteTextViewHelper<FilterOption.Prise>(
             autoCompleteTextView = view.findViewById(R.id.prise)
         ){
             it.from.convertPrise("$")+ " - "+ it.to.convertPrise("$")
         }
+        filterPriseHelper!!.init(requireContext())
         filterSizeHelper = AutoCompleteTextViewHelper<FilterOption.Size>(
             autoCompleteTextView = view.findViewById(R.id.size)
         ){
             String.format(getString(R.string.sizes),it.to,it.to)
         }
+        filterSizeHelper!!.init(requireContext())
 
-        view.findViewById<Button>(R.id.close).setOnClickListener {
+        view.findViewById<ImageButton>(R.id.close).setOnClickListener {
             findNavController().popBackStack()
         }
         view.findViewById<Button>(R.id.done).setOnClickListener {

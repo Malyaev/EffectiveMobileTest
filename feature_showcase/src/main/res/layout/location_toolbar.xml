@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar
-    android:id="@+id/top_toolbar"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/top_toolbar"
     app:menu="@menu/top_menu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             >
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 style="@style/Style.FetureShowcase.MaterialAutoCompleteTextView.Location"
-                android:id="@+id/location"
+                android:id="@+id/location_select"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"

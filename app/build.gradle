@@ -34,14 +34,14 @@ android {
 }
 
 dependencies {
-
+    implementation project(':ui_components')
     implementation project(':feature_mycart')
     implementation project(':feature_product_details')
     implementation project(':feature_showcase')
     implementation project(':api_database')
     implementation project(':api_network')
     implementation project(':core')
-    implementation project(':ui_components')
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -51,6 +51,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.5.4'
 
     implementation 'com.google.dagger:dagger:2.44'
+    kapt 'com.google.dagger:dagger-android-processor:2.15'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     kapt 'com.google.dagger:dagger-compiler:2.44'

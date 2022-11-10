@@ -13,6 +13,7 @@ class FeatureModulesInitializerImpl @Inject constructor(
     private val productDependencies : ProductDependencies,
     private val featureMyCartDependency : FeatureMyCartDependency
     ): FeatureModulesInitializer {
+
     override fun initialize() {
         FeatureShowcaseComponentHolder.init(showcaseDependencies)
         FeatureProductComponentHolder.init(productDependencies)
