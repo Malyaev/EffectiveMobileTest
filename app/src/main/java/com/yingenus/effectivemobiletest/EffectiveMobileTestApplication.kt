@@ -7,7 +7,7 @@ import com.yingenus.effectivemobiletest.di.FeatureModulesInitializer
 class EffectiveMobileTestApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        val appComponent : AppComponent = AppComponent.initAndGet()
+        val appComponent : AppComponent = AppComponent.initAndGet(this)
         val initializer : FeatureModulesInitializer = appComponent.getFeatureModulesInitializer()
         initializer.initialize()
     }

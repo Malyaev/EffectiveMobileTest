@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
+import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.feature_showcase.R
 import com.yingenus.core.textutils.convertPrise
 import com.yingenus.feature_showcase.presentation.adapterItem.*
@@ -28,7 +29,7 @@ internal fun getHeaderAdapterDelegate( viewAllClicked : (Header) -> Unit ) =
         }
     }
 
-internal fun getBestSalterAdapterDelegate( viewClicked: (BestSeller) -> Unit,
+internal fun getBestSalterAdapterDelegate(imageLoader: ImageLoader, viewClicked: (BestSeller) -> Unit,
                                          onLikeClicked : (BestSeller, Boolean) -> Unit) =
     adapterDelegate<BestSeller, ShopItem>(R.layout.best_seller_item){
         val image : ImageView = findViewById(R.id.image)
@@ -45,7 +46,7 @@ internal fun getBestSalterAdapterDelegate( viewClicked: (BestSeller) -> Unit,
         }
 
         bind {
-            image.setImageURI(item.bestSellerProduct.picture)
+            imageLoader.loadImage(item.bestSellerProduct.picture,image)
             priseDiscount.text = item.bestSellerProduct.discountPrise.convertPrise("$")
             priseWithoutDiscount.text = item.bestSellerProduct.priceWithoutDiscount.convertPrise("$")
             title.text = item.bestSellerProduct.title

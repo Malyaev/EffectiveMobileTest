@@ -5,11 +5,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
+import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.feature_showcase.R
 import com.yingenus.feature_showcase.presentation.adapterItem.HotSales
 import com.yingenus.feature_showcase.presentation.adapterItem.HotSalesItem
 
-internal fun getHotSalesAdapterDelegate( onBuyClicked : (HotSales) -> Unit) =
+internal fun getHotSalesAdapterDelegate( imageLoader: ImageLoader, onBuyClicked : (HotSales) -> Unit) =
     adapterDelegate<HotSales, HotSalesItem>(R.layout.hot_sales_item){
         val icNew : View = findViewById(R.id.new_icon)
         val title : TextView = findViewById(R.id.title)
@@ -23,6 +24,6 @@ internal fun getHotSalesAdapterDelegate( onBuyClicked : (HotSales) -> Unit) =
             icNew.visibility = if(item.hotSalesProduct.isNew) View.VISIBLE else View.GONE
             title.text = item.hotSalesProduct.title
             details.text = item.hotSalesProduct.subtitle
-            image.setImageURI(item.hotSalesProduct.picture)
+            imageLoader.loadImage(item.hotSalesProduct.picture,image)
         }
     }

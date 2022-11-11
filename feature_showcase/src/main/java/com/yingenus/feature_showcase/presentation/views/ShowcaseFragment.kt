@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
+import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.feature_showcase.R
 import com.yingenus.feature_showcase.domain.dto.Location
 import com.yingenus.feature_showcase.presentation.adapterItem.*
@@ -40,6 +41,9 @@ import javax.inject.Inject
 
 internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
 
+    @Inject
+    lateinit var imageLoader: ImageLoader
+
     private var locationView : AutoCompleteTextView? = null
     private var categoryRecycler : RecyclerView? = null
     private var storeRecycler : RecyclerView? = null
@@ -54,8 +58,12 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
 
     private val componentViewModel : ComponentViewModel by navGraphViewModels(R.id.main_showcase)
     private val showCaseViewModel : ShowCaseViewModel by navGraphViewModels<ShowCaseViewModel>(R.id.main_showcase) {
-        componentViewModel.getFeatureComponent().injectShowFragment(this)
         showCaseViewModelFactory
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        componentViewModel.getFeatureComponent().injectShowFragment(this)
     }
 
     override fun onCreateView(
@@ -93,12 +101,12 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
             }
 
         val hotSalesAdapter = ListDelegationAdapter<List<HotSalesItem>>(
-            getHotSalesAdapterDelegate {
+            getHotSalesAdapterDelegate(imageLoader) {
                 openHotSale(it)
             }
         )
 
-        storeRecycler!!.adapter = StoreAdapter({
+        storeRecycler!!.adapter = StoreAdapter(imageLoader,{
             when(it){
                 hotSalesHeader -> viewAllHotSale()
                 bestSellerHeader -> viewAllBestSeller()
@@ -113,7 +121,7 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
         }
 
         val categoryAdapter = ListDelegationAdapter<List<CategoryItem>>(
-            getCategoryAdapterDelegate {
+            getCategoryAdapterDelegate(imageLoader) {
                 showCaseViewModel.categorySelected(it)
             }
         )

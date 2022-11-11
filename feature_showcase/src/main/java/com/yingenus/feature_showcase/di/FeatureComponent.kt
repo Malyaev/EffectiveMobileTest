@@ -5,7 +5,7 @@ import com.yingenus.feature_showcase.presentation.views.FilterDialog
 import com.yingenus.feature_showcase.presentation.views.ShowcaseFragment
 import dagger.Component
 
-@Component(modules = [RepositoryModule::class], dependencies = [ShowcaseDependencies::class])
+@Component(modules = [FeatureModule::class], dependencies = [ShowcaseDependencies::class])
 @Showcase
 internal abstract class FeatureComponent {
 

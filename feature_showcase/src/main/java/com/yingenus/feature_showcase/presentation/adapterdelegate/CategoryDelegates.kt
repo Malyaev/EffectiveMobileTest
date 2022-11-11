@@ -4,11 +4,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
+import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.feature_showcase.R
 import com.yingenus.feature_showcase.presentation.adapterItem.Category
 import com.yingenus.feature_showcase.presentation.adapterItem.CategoryItem
 
-internal fun getCategoryAdapterDelegate( onCategoryClicked : (Category) -> Unit) =
+internal fun getCategoryAdapterDelegate(imageLoader: ImageLoader, onCategoryClicked : (Category) -> Unit) =
     adapterDelegate<Category, CategoryItem>(R.layout.category_item){
         val icon : ImageView = findViewById(R.id.icon)
         val title : TextView = findViewById(R.id.title)
@@ -20,6 +21,7 @@ internal fun getCategoryAdapterDelegate( onCategoryClicked : (Category) -> Unit)
 
         bind {
             icon.setImageURI(item.category.icon)
+            imageLoader.loadImage(item.category.icon,icon)
             title.text = item.category.title
             itemView.isSelected = item.isSelected
         }

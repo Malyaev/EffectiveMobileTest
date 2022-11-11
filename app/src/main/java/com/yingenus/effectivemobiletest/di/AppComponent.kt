@@ -10,14 +10,13 @@ abstract class AppComponent {
     @Component.Builder
     interface Builder{
         @BindsInstance
-        fun context(context: Context)
+        fun context(context: Context): Builder
         fun build(): AppComponent
     }
 
     companion object{
-        fun initAndGet(): AppComponent{
-            //return DaggerAppComponent.builder().build()
-            TODO()
+        fun initAndGet(context: Context): AppComponent{
+            return DaggerAppComponent.builder().context(context).build()
         }
     }
 

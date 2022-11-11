@@ -3,6 +3,7 @@ package com.yingenus.feature_showcase.presentation.views
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
+import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.feature_showcase.presentation.adapterItem.BestSeller
 import com.yingenus.feature_showcase.presentation.adapterItem.Header
 import com.yingenus.feature_showcase.presentation.adapterItem.HotSalesItem
@@ -11,14 +12,14 @@ import com.yingenus.feature_showcase.presentation.adapterdelegate.getBestSalterA
 import com.yingenus.feature_showcase.presentation.adapterdelegate.getHeaderAdapterDelegate
 import com.yingenus.feature_showcase.presentation.adapterdelegate.getHotSalesContainerAdapterDelegate
 
-internal class StoreAdapter(
+internal class StoreAdapter( imageLoader: ImageLoader,
     onHeader : (Header) -> Unit,
     onBestSeller : (BestSeller) -> Unit,
     onLikeBestSeller : (BestSeller, Boolean) -> Unit,
     hotSalesItemAdapter: ListDelegationAdapter<List<HotSalesItem>>
 ): ListDelegationAdapter<List<ShopItem>>(
     getHeaderAdapterDelegate(onHeader),
-    getBestSalterAdapterDelegate(onBestSeller,onLikeBestSeller),
+    getBestSalterAdapterDelegate(imageLoader,onBestSeller,onLikeBestSeller),
     getHotSalesContainerAdapterDelegate(hotSalesItemAdapter)
 ){
     class HotSalesSizeLookup(val recyclerView: RecyclerView) : GridLayoutManager.SpanSizeLookup(){

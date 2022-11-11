@@ -19,6 +19,7 @@ internal abstract class NetworkComponent : NetworkApi{
                 synchronized(NetworkComponent::class){
                     if (networkComponent == null){
                         networkComponent = DaggerNetworkComponent.builder()
+                            .networkDependency(dependency)
                             .build()
                     }
                 }
