@@ -5,9 +5,12 @@
         <item name="startIconDrawable">@drawable/location</item>
         <item name="startIconTint">?attr/colorSecondary</item>
         <item name="boxStrokeWidth">0dp</item>
+        <item name="endIconDrawable">@drawable/drop_down</item>
+        <item name="endIconMode">custom</item>
     </style>
     <style name="Style.FetureShowcase.MaterialAutoCompleteTextView.Location" parent="Widget.AppCompat.Light.AutoCompleteTextView">
         <item name="android:textSize">19sp</item>
+
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="fontFamily">@font/mark_pro_normal</item>
     </style>
@@ -19,6 +22,8 @@
     </style>
     <style name="Style.FetureShowcase.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeWidth">1dp</item>
+        <item name="endIconDrawable">@drawable/drop_down</item>
+        <item name="endIconMode">custom</item>
         <item name="backgroundTint">?attr/colorSurface</item>
         <item name="hintTextColor">?attr/hintTextColor</item>
         <item name="boxStrokeColor">?attr/outlined_color</item>

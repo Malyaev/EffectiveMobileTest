@@ -12,7 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.core.textutils.convertPrise
 import com.yingenus.feature_showcase.R
 import com.yingenus.feature_showcase.domain.dto.FilterOption
@@ -51,7 +53,7 @@ internal class FilterDialog : BottomSheetDialogFragment(R.layout.bottom_dialog) 
         val view =  super.onCreateView(inflater, container, savedInstanceState)!!
 
         filterBrandHelper = AutoCompleteTextViewHelper<FilterOption.Brand>(
-            autoCompleteTextView = view.findViewById(R.id.brand)
+            autoCompleteTextView = view.findViewById<AutoCompleteTextView?>(R.id.brand)
         ) {
             it.name
         }
@@ -65,7 +67,7 @@ internal class FilterDialog : BottomSheetDialogFragment(R.layout.bottom_dialog) 
         filterSizeHelper = AutoCompleteTextViewHelper<FilterOption.Size>(
             autoCompleteTextView = view.findViewById(R.id.size)
         ){
-            String.format(getString(R.string.sizes),it.to,it.to)
+            String.format(getString(R.string.sizes),it.from,it.to)
         }
         filterSizeHelper!!.init(requireContext())
 
@@ -75,6 +77,8 @@ internal class FilterDialog : BottomSheetDialogFragment(R.layout.bottom_dialog) 
         view.findViewById<Button>(R.id.done).setOnClickListener {
             applyFilters()
         }
+
+        setPeekHeight(view)
 
         subscribeToViewModel()
 
@@ -115,6 +119,17 @@ internal class FilterDialog : BottomSheetDialogFragment(R.layout.bottom_dialog) 
         val size = filterSizeHelper!!.getSelectedItem()
         showCaseViewModel.setFilter(brand,prise,size)
         findNavController().popBackStack()
+    }
+
+    private fun setPeekHeight( view: View){
+        val heightSpec = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED)
+        val widthSpec = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED)
+        view.measure(widthSpec,heightSpec)
+        val height = view.measuredHeight
+
+        val  behavior = (dialog as BottomSheetDialog).behavior
+        behavior.peekHeight = height
+        behavior.isDraggable = false
     }
 
 }
