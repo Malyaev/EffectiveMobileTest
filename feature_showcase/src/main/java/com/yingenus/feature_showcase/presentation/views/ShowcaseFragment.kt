@@ -203,7 +203,7 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun updateCategoryItems(categorys: List<Category>){
-        (categoryRecycler!!.adapter as ListDelegationAdapter<List<CategoryItem>>)
+        (categoryRecycler!!.adapter as ListDelegationAdapter<*>)
             .let {
                 it.items = categorys
                 it.notifyDataSetChanged()

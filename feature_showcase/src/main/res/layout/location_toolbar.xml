@@ -16,7 +16,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Style.FetureShowcase.TextInputLayout.Location"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             >
             <com.google.android.material.textfield.MaterialAutoCompleteTextView

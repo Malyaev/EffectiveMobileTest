@@ -1,5 +1,10 @@
 package com.yingenus.feature_showcase.presentation.adapterdelegate
 
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.PaintFlagsDrawFilter
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView

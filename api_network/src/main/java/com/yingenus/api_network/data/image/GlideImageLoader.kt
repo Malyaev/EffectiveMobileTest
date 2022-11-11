@@ -2,6 +2,7 @@ package com.yingenus.api_network.data.image
 
 import android.R
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.PictureDrawable
 import android.net.Uri
 import android.widget.ImageView
@@ -20,12 +21,13 @@ internal class GlideImageLoader @Inject constructor(private val context: Context
 
     private val requestSVG by lazy {
         Glide.with(context)
-            .`as`(PictureDrawable::class.java)
+            .`as`(BitmapDrawable::class.java)
             .transition(withCrossFade())
             .listener(SvgSoftwareLayerSetter())
     }
 
     override fun loadImage(url: String, imageView: ImageView, width: Int, height: Int) {
+        clear(imageView)
         if (url.contains(".svg"))
             requestSVG.load(url).override(width, height).into(imageView)
         else
@@ -33,6 +35,7 @@ internal class GlideImageLoader @Inject constructor(private val context: Context
     }
 
     override fun loadImage(uri: Uri, imageView: ImageView, width: Int, height: Int) {
+        clear(imageView)
          if (uri.toString().contains(".svg"))
             requestSVG.load(uri).override(width, height).into(imageView)
         else
@@ -40,6 +43,7 @@ internal class GlideImageLoader @Inject constructor(private val context: Context
     }
 
     override fun loadImage(url: String, imageView: ImageView) {
+        clear(imageView)
         if (url.contains(".svg"))
             requestSVG.load(url).circleCrop().into(imageView)
         else
@@ -47,6 +51,7 @@ internal class GlideImageLoader @Inject constructor(private val context: Context
     }
 
     override fun loadImage(uri: Uri, imageView: ImageView) {
+        clear(imageView)
         if (uri.toString().contains(".svg"))
             requestSVG.load(uri).circleCrop().into(imageView)
         else
@@ -55,5 +60,6 @@ internal class GlideImageLoader @Inject constructor(private val context: Context
 
     override fun clear(imageView: ImageView) {
         Glide.with(context).clear(imageView)
+        imageView.setImageDrawable(null)
     }
 }

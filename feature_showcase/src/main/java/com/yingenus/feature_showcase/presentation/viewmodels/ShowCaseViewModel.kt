@@ -1,5 +1,6 @@
 package com.yingenus.feature_showcase.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -39,7 +40,6 @@ internal class ShowCaseViewModel  @Inject constructor(
     val error : StateFlow<String?>
         get() = _error.asStateFlow()
 
-    private var categoryList: List<Category> = emptyList()
     private val _categoriesStateFlow: MutableStateFlow<List<Category>>
         = MutableStateFlow( emptyList() )
     val categories : StateFlow<List<Category>>
@@ -98,13 +98,13 @@ internal class ShowCaseViewModel  @Inject constructor(
     }
     fun categorySelected( category: Category){
         viewModelScope.launch {
-            val updatedCategories = categoryList.map {
+            val updatedCategories = _categoriesStateFlow.value
+                .map {
                 if (it == category) Category(it.category,isSelected = true)
                 else if (it.isSelected) Category(it.category, false)
-                else category
+                else it
             }
-            categoryList = updatedCategories
-            _categoriesStateFlow.emit(categoryList)
+            _categoriesStateFlow.emit(updatedCategories)
         }
     }
 
