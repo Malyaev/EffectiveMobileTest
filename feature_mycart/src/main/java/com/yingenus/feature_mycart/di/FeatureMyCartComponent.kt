@@ -3,7 +3,7 @@ package com.yingenus.feature_mycart.di
 import com.yingenus.feature_mycart.presentation.view.MyCartFragment
 import dagger.Component
 
-@Component(modules = [RepositoryModule::class], dependencies = [FeatureMyCartDependency::class])
+@Component(modules = [FeatureMyCartModule::class], dependencies = [FeatureMyCartDependency::class])
 @MyChart
 internal abstract class FeatureMyCartComponent {
 
