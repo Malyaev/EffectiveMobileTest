@@ -13,6 +13,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import com.yingenus.api_network.api.StoreRepository as ApiStoreRepository
 import com.yingenus.core.Result
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 internal class StoreRepositoryImpl @Inject constructor(val networkApi: NetworkApi): StoreRepository {
@@ -56,5 +58,20 @@ internal class StoreRepositoryImpl @Inject constructor(val networkApi: NetworkAp
             if (it is Result.Success) Result.Success(it.value.toHomeShowcase())
             else it as Result<HomeShowcase>
         }
+    }
+
+    override fun likeBestSeller(bestSeller: BestSellerProduct, isFavorites : Boolean): Flow<Result<BestSellerProduct>> {
+        return flow {
+            emit(Result.Success(BestSellerProduct(
+                bestSeller.id,
+                bestSeller.discountPrise,
+                isFavorites,
+                bestSeller.picture,
+                bestSeller.priceWithoutDiscount,
+                bestSeller.title
+            )))
+        }
+
+
     }
 }

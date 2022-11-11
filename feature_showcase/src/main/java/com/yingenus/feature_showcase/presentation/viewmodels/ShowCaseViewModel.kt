@@ -109,7 +109,26 @@ internal class ShowCaseViewModel  @Inject constructor(
     }
 
     fun likeBestSeller( bestSeller: BestSeller, isLicked : Boolean){
-        //TODO()
+        viewModelScope.launch {
+            storeRepository
+                .likeBestSeller(bestSeller.bestSellerProduct,isLicked)
+                .onEach { resilt ->
+                    when(resilt){
+                        is com.yingenus.core.Result.Success ->{
+                            val updated = _bestSellersStateFlow.value.map {
+                                if (it.bestSellerProduct.id == resilt.value.id) BestSeller(resilt.value)
+                                else it
+                            }
+                            _bestSellersStateFlow.emit(updated)
+                        }
+                        is com.yingenus.core.Result.Error -> {
+                            _error.emit(resilt.error.message)
+                        }
+                        else -> {}
+                    }
+
+                }.collect()
+        }
     }
 
     fun searchQuery( query : String){

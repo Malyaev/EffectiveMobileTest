@@ -11,7 +11,7 @@ class SplashFragment : Fragment(R.layout.splash_layout) {
     override fun onStart() {
         super.onStart()
         lifecycleScope.launch {
-            delay(5000)
+            delay(2000)
             findNavController().navigate(R.id.splash_fragment_to_main)
         }
     }

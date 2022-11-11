@@ -1,8 +1,11 @@
 package com.yingenus.feature_showcase.presentation.adapterdelegate
 
-import android.annotation.SuppressLint
+import android.R as aR
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.StateListDrawable
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -11,15 +14,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
+import com.yingenus.ImageUtils.isChecked
 import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.core.sizeutils.dp2px
-import com.yingenus.feature_showcase.R
 import com.yingenus.core.textutils.convertPrise
+import com.yingenus.feature_showcase.R
 import com.yingenus.feature_showcase.presentation.adapterItem.*
-import com.yingenus.feature_showcase.presentation.adapterItem.ShopItem
-import com.yingenus.feature_showcase.presentation.adapterItem.BestSeller
-import com.yingenus.feature_showcase.presentation.adapterItem.Header
-import com.yingenus.feature_showcase.presentation.adapterItem.HotSalesItem
 
 
 internal fun getHeaderAdapterDelegate( viewAllClicked : (Header) -> Unit ) =
@@ -44,8 +44,7 @@ internal fun getBestSalterAdapterDelegate(imageLoader: ImageLoader, viewClicked:
 
         itemView.setOnClickListener { viewClicked(item) }
         likeButton.setOnClickListener {
-            likeButton.isSelected = !likeButton.isSelected
-            onLikeClicked(item, likeButton.isSelected)
+            onLikeClicked(item, !likeButton.isChecked())
             itemId
         }
 
@@ -54,7 +53,8 @@ internal fun getBestSalterAdapterDelegate(imageLoader: ImageLoader, viewClicked:
             priseDiscount.text = item.bestSellerProduct.discountPrise.convertPrise("$")
             priseWithoutDiscount.text = item.bestSellerProduct.priceWithoutDiscount.convertPrise("$")
             title.text = item.bestSellerProduct.title
-            likeButton.isSelected = item.bestSellerProduct.isFavorites
+            likeButton.isChecked(item.bestSellerProduct.isFavorites)
+            Log.d("Image", "state : ${item.bestSellerProduct.isFavorites}")
         }
 
     }
