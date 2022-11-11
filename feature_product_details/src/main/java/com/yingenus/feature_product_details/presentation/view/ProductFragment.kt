@@ -20,6 +20,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.tabs.TabLayout
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
+import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.feature_product_details.R
 import com.yingenus.feature_product_details.presentation.adapterelegat.getImageAdapterDelegate
@@ -38,12 +39,14 @@ import kotlin.math.min
 
 internal class ProductFragment : Fragment(R.layout.product_fragment) {
 
+    @Inject
+    lateinit var imageLoader: ImageLoader
+
     private val componentViewModel : ComponentViewModel by navGraphViewModels(R.id.main_product)
     @Inject
     lateinit var productViewModelFactory : Provider<ProductViewModelFactory.Factory>
     private val productViewModel: ProductViewModel by viewModels{
         val id = requireArguments().getInt("id")
-        componentViewModel.getFeatureComponent().injectProductFragment(this)
         productViewModelFactory.get().crate(id)
     }
 
@@ -54,6 +57,11 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
     private var title : TextView? = null
     private var stars : ChipGroup? = null
     private var tabbar: TabLayout? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        componentViewModel.getFeatureComponent().injectProductFragment(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -171,7 +179,7 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
     private fun initImageViewPager(){
 
         imageViewPager!!.adapter = ListDelegationAdapter<List<ImageItem>>(
-            getImageAdapterDelegate()
+            getImageAdapterDelegate(imageLoader)
         )
         imageViewPager!!.offscreenPageLimit = 1
 
