@@ -15,4 +15,8 @@
     <string name="hot_sales">Hot sales</string>
     <string name="best_seller">Best Seller</string>
     <string name="sizes"> %%.1f%n to %%.1f%n inches</string>
+    <string name="phones">Phones</string>
+    <string name="computer">Computer</string>
+    <string name="health">Health</string>
+    <string name="books">Books</string>
 </resources>

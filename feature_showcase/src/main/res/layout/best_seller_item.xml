@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="181dp"
+    android:layout_width="match_parent"
     android:layout_height="227dp"
     app:cardCornerRadius="10dp"
     >
@@ -60,8 +60,8 @@
             android:textSize="10sp"
             tools:text="$1,500"
             android:textColor="?attr/prise_without_discount_color"
-            app:layout_constraintBaseline_toBaselineOf="@id/prise"
-            app:layout_constraintStart_toEndOf="@id/prise"
+            app:layout_constraintBaseline_toBaselineOf="@id/discount_prise"
+            app:layout_constraintStart_toEndOf="@id/discount_prise"
             android:layout_marginStart="7dp"
             android:layout_marginTop="2dp"
             />
@@ -74,7 +74,7 @@
             android:textSize="10sp"
             tools:text="Samsung Galaxy s20 Ultra"
             android:textColor="?attr/colorPrimary"
-            app:layout_constraintTop_toBottomOf="@id/prise"
+            app:layout_constraintTop_toBottomOf="@id/discount_prise"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="21dp"
             android:layout_marginTop="5dp"

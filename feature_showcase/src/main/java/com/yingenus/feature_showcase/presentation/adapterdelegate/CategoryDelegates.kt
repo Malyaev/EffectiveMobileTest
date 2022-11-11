@@ -20,8 +20,7 @@ internal fun getCategoryAdapterDelegate(imageLoader: ImageLoader, onCategoryClic
         }
 
         bind {
-            icon.setImageURI(item.category.icon)
-            imageLoader.loadImage(item.category.icon,icon)
+            imageLoader.loadImage(item.category.icon,icon,icon.width,icon.height)
             title.text = item.category.title
             itemView.isSelected = item.isSelected
         }

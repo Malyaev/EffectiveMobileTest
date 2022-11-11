@@ -2,6 +2,8 @@ package com.yingenus.feature_showcase.presentation.adapterdelegate
 
 import android.annotation.SuppressLint
 import android.graphics.Paint
+import android.graphics.Rect
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
 import com.yingenus.api_network.api.ImageLoader
+import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.feature_showcase.R
 import com.yingenus.core.textutils.convertPrise
 import com.yingenus.feature_showcase.presentation.adapterItem.*
@@ -43,6 +46,7 @@ internal fun getBestSalterAdapterDelegate(imageLoader: ImageLoader, viewClicked:
         likeButton.setOnClickListener {
             likeButton.isSelected = !likeButton.isSelected
             onLikeClicked(item, likeButton.isSelected)
+            itemId
         }
 
         bind {
@@ -60,6 +64,18 @@ internal fun getHotSalesContainerAdapterDelegate(
 = adapterDelegate<HotSalesContainer, ShopItem>(R.layout.hot_sales_item_container){
     val recycler : RecyclerView = findViewById(R.id.recycler)
     recycler.adapter = hotSalesItemAdapter
+    recycler.addItemDecoration(object : RecyclerView.ItemDecoration(){
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            val pix = (12).dp2px(view.context)
+            outRect.left+=pix
+            if (parent.getChildLayoutPosition(view) == parent.adapter!!.itemCount -1) outRect.right+=pix
+        }
+    })
 
     bind {
         hotSalesItemAdapter.items = item.hotSalesItem

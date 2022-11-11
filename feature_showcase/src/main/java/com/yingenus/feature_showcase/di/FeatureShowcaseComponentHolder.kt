@@ -1,5 +1,6 @@
 package com.yingenus.feature_showcase.di
 
+import android.content.Context
 import java.lang.ref.WeakReference
 
 object FeatureShowcaseComponentHolder {
@@ -22,11 +23,11 @@ object FeatureShowcaseComponentHolder {
         }
     }
 
-    internal fun getFeatureComponent(): FeatureComponent{
+    internal fun getFeatureComponent(context: Context): FeatureComponent{
         require(dependencies != null){
             "FeatureShowcaseComponentHolder is not initialized"
         }
-        return FeatureComponent.init(dependencies!!)
+        return FeatureComponent.init(dependencies!!,context)
     }
 
     private fun dependenciesInitialized(): Nothing{

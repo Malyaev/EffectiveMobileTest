@@ -3,6 +3,7 @@ package com.yingenus.feature_showcase.presentation.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.yingenus.feature_showcase.domain.CategoryRepository
 import com.yingenus.feature_showcase.domain.LocationRepository
 import com.yingenus.feature_showcase.domain.StoreRepository
 import com.yingenus.feature_showcase.domain.dto.FilterOption
@@ -19,7 +20,8 @@ import javax.inject.Provider
 
 internal class ShowCaseViewModel  @Inject constructor(
     private val storeRepository: StoreRepository,
-    private val locationRepository: LocationRepository
+    private val locationRepository: LocationRepository,
+    private val categoryRepository: CategoryRepository
 ): ViewModel() {
 
     class ShowCaseViewModelFactory @Inject constructor(
@@ -84,6 +86,15 @@ internal class ShowCaseViewModel  @Inject constructor(
                 _selectedLocation.emit(it)
             }
             .launchIn(viewModelScope)
+        categoryRepository
+            .getCategories()
+            .onEach {
+                _categoriesStateFlow.emit(
+                    it.mapIndexed{ i, c ->
+                        Category(c, i == 0)
+                    }
+                )
+            }.launchIn(viewModelScope)
     }
     fun categorySelected( category: Category){
         viewModelScope.launch {

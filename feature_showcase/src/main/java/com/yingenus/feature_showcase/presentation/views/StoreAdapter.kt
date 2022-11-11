@@ -1,9 +1,12 @@
 package com.yingenus.feature_showcase.presentation.views
 
+import android.graphics.Rect
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.yingenus.api_network.api.ImageLoader
+import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.feature_showcase.presentation.adapterItem.BestSeller
 import com.yingenus.feature_showcase.presentation.adapterItem.Header
 import com.yingenus.feature_showcase.presentation.adapterItem.HotSalesItem
@@ -35,5 +38,31 @@ internal class StoreAdapter( imageLoader: ImageLoader,
             }?: throw RuntimeException()
         }
 
+    }
+
+    class HotSalesBoundDecorator : RecyclerView.ItemDecoration(){
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            val position = parent.getChildLayoutPosition(view)
+            if ( (parent.adapter as StoreAdapter).getItems()?.getOrNull(position) is BestSeller ){
+                val items = (parent.adapter as StoreAdapter).items!!
+                val firstBestSeller = items.indexOfFirst { it is BestSeller }
+                val positionInBestSellers = (items.size - position) - firstBestSeller
+                val paddings = (8).dp2px(view.context)
+                outRect.top = (paddings/2)
+                outRect.bottom = (paddings/2)
+                if (positionInBestSellers%2 != 0){
+                    outRect.left += paddings
+                    outRect.right += (paddings/2)
+                }else{
+                    outRect.right += paddings
+                    outRect.left += (paddings/2)
+                }
+            }
+        }
     }
 }

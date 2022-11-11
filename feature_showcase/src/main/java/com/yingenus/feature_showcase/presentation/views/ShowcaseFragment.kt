@@ -63,7 +63,7 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        componentViewModel.getFeatureComponent().injectShowFragment(this)
+        componentViewModel.getFeatureComponent(requireActivity()).injectShowFragment(this)
     }
 
     override fun onCreateView(
@@ -119,6 +119,7 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
         storeRecycler!!.layoutManager = GridLayoutManager(requireContext(),2).apply {
             spanSizeLookup = StoreAdapter.HotSalesSizeLookup(storeRecycler!!)
         }
+        storeRecycler!!.addItemDecoration(StoreAdapter.HotSalesBoundDecorator())
 
         val categoryAdapter = ListDelegationAdapter<List<CategoryItem>>(
             getCategoryAdapterDelegate(imageLoader) {

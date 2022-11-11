@@ -30,12 +30,12 @@ internal class FilterDialog : BottomSheetDialogFragment(R.layout.bottom_dialog) 
     @Inject
     lateinit var showCaseViewModelFactory: ShowCaseViewModel.ShowCaseViewModelFactory
     private val filterViewModel by viewModels<FilterViewModel> {
-        componentViewModel.getFeatureComponent().injectFiltersDialog(this)
+        componentViewModel.getFeatureComponent(requireActivity()).injectFiltersDialog(this)
         filterViewModelFactory
     }
     private val componentViewModel: ComponentViewModel by navGraphViewModels(R.id.main_showcase)
     private val showCaseViewModel : ShowCaseViewModel by navGraphViewModels<ShowCaseViewModel>(R.id.main_showcase) {
-        if (!::showCaseViewModelFactory.isInitialized) componentViewModel.getFeatureComponent().injectFiltersDialog(this)
+        if (!::showCaseViewModelFactory.isInitialized) componentViewModel.getFeatureComponent(requireActivity()).injectFiltersDialog(this)
         showCaseViewModelFactory
     }
 

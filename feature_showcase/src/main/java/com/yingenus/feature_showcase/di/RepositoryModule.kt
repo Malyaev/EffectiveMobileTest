@@ -1,8 +1,10 @@
 package com.yingenus.feature_showcase.di
 
+import com.yingenus.feature_showcase.data.CategoryRepositoryImpl
 import com.yingenus.feature_showcase.data.StoreRepositoryImpl
 import com.yingenus.feature_showcase.data.mock.MockFilterOptionRepository
 import com.yingenus.feature_showcase.data.mock.MockLocationRepository
+import com.yingenus.feature_showcase.domain.CategoryRepository
 import com.yingenus.feature_showcase.domain.FilterOptionRepository
 import com.yingenus.feature_showcase.domain.LocationRepository
 import com.yingenus.feature_showcase.domain.StoreRepository
@@ -17,5 +19,7 @@ internal abstract class RepositoryModule {
     @Binds abstract fun provideLocationRepository( mockLocationRepository: MockLocationRepository): LocationRepository
 
     @Binds abstract fun provideFilterOptionRepository( mockFilterOptionRepository: MockFilterOptionRepository): FilterOptionRepository
+
+    @Binds abstract fun provideCategoryRepository( categoryRepositoryImpl: CategoryRepositoryImpl): CategoryRepository
 
 }
