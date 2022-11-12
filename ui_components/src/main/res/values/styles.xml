@@ -90,6 +90,18 @@
         <item name="android:fontFamily">@font/mark_pro_normal</item>
         <item name="android:textColor">?attr/colorPrimary</item>
     </style>
+    <style name="Style.App.TextAppearance.Light">
+        <item name="fontFamily">@font/mark_pro_light</item>
+        <item name="android:fontFamily">@font/mark_pro_light</item>
+    </style>
+    <style name="Style.App.TextAppearance.Bold">
+        <item name="fontFamily">@font/mark_pro_bold</item>
+        <item name="android:fontFamily">@font/mark_pro_bold</item>
+    </style>
+    <style name="Style.App.TextAppearance.ExtraBold">
+        <item name="fontFamily">@font/mark_pro_extra_bold</item>
+        <item name="android:fontFamily">@font/mark_pro_extra_bold</item>
+    </style>
     <style name="Style.App.Rounded" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>

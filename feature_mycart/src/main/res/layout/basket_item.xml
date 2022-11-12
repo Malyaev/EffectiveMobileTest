@@ -26,11 +26,11 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
+        style="@style/Style.App.TextAppearance"
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="Galaxy Note 20 Ultra"
-        android:fontFamily="@font/mark_pro_normal"
         android:textSize="20sp"
         android:textColor="?attr/colorOnPrimary"
         app:layout_constraintTop_toTopOf="@id/image_container"
@@ -42,10 +42,10 @@
         />
 
     <TextView
+        style="@style/Style.App.TextAppearance"
         android:id="@+id/prise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/mark_pro_normal"
         android:textColor="?attr/colorSecondary"
         android:textSize="20sp"
         tools:text="$1,200.00"

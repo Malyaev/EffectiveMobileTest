@@ -18,36 +18,36 @@
         android:layout_height="90dp">
 
         <TextView
+            style="@style/Style.App.TextAppearance.Light"
             android:id="@+id/title_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/mark_pro_light"
             android:textSize="15sp"
             android:text="@string/total"
             android:textColor="?attr/colorOnPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="15dp"
-            android:layout_marginStart="55dp"/>
+            android:layout_marginStart="22dp"/>
 
         <TextView
+            style="@style/Style.App.TextAppearance.ExtraBold"
             android:id="@+id/total_value"
             android:layout_width="wrap_content"
             android:minWidth="73dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/mark_pro_extra_bold"
             android:textSize="15sp"
             tools:text="$6,000 us"
             android:textColor="?attr/colorOnPrimary"
             app:layout_constraintBaseline_toBaselineOf="@id/title_total"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="35dp"/>
+            android:layout_marginEnd="20dp"/>
 
         <TextView
+            style="@style/Style.App.TextAppearance.Light"
             android:id="@+id/delivery_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/mark_pro_light"
             android:textSize="15sp"
             android:text="@string/delivery"
             android:textColor="?attr/colorOnPrimary"
@@ -57,11 +57,11 @@
             />
 
         <TextView
+            style="@style/Style.App.TextAppearance.ExtraBold"
             android:id="@+id/delivery_value"
             android:layout_width="wrap_content"
             android:minWidth="73dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/mark_pro_extra_bold"
             android:textSize="15sp"
             tools:text="Free"
             android:textColor="?attr/colorOnPrimary"

@@ -13,11 +13,10 @@
     >
 
     <TextView
+        style="@style/Style.App.TextAppearance"
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?attr/colorPrimary"
-        android:fontFamily="@font/mark_pro"
         android:text="@string/filter_options"
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
@@ -74,11 +73,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        style="@style/Style.App.TextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/brand"
-        android:fontFamily="@font/mark_pro_normal"
-        android:textColor="?attr/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@id/brand_input_layout"
         app:layout_constraintBottom_toTopOf="@id/brand_input_layout"
@@ -107,11 +105,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        style="@style/Style.App.TextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/prise"
-        android:fontFamily="@font/mark_pro_normal"
-        android:textColor="?attr/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@id/prise_input_layout"
         app:layout_constraintBottom_toTopOf="@id/prise_input_layout"
@@ -142,11 +139,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        style="@style/Style.App.TextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/size"
-        android:fontFamily="@font/mark_pro_normal"
-        android:textColor="?attr/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@id/size_input_layout"
         app:layout_constraintBottom_toTopOf="@id/size_input_layout"

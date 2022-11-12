@@ -38,7 +38,7 @@ internal fun getBestSalterAdapterDelegate(imageLoader: ImageLoader, viewClicked:
         val image : ImageView = findViewById(R.id.image)
         val priseDiscount : TextView = findViewById(R.id.discount_prise)
         val priseWithoutDiscount : TextView = findViewById(R.id.prise_without_discount)
-        priseWithoutDiscount.paintFlags = priseWithoutDiscount.paintFlags.and(Paint.STRIKE_THRU_TEXT_FLAG)
+        priseWithoutDiscount.paintFlags = priseWithoutDiscount.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         val title : TextView = findViewById(R.id.title)
         val likeButton : ImageButton = findViewById(R.id.like)
 

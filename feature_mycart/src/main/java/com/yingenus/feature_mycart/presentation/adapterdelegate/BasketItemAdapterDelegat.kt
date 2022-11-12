@@ -36,7 +36,7 @@ internal fun getProductDelegate(
     bind {
         imageLoader.loadImage(item.basketProduct.images,image)
         title.text = item.basketProduct.title
-        prise.text = item.basketProduct.price.convertPrise("$",2,"us")
+        prise.text = item.basketProduct.price.convertPrise("$",2)
         count.text = item.basketProduct.number.toString()
     }
 }

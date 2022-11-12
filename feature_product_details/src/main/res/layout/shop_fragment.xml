@@ -161,9 +161,9 @@
         android:focusable="true">
 
         <TextView
+            style="@style/Style.App.TextAppearance.Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/mark_pro_extra_bold"
             android:textSize="20sp"
             android:textColor="?attr/colorOnSecondary"
             android:text="@string/add_to_cart"
@@ -172,10 +172,10 @@
             />
 
         <TextView
+            style="@style/Style.App.TextAppearance.Bold"
             android:id="@+id/prise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/mark_pro_extra_bold"
             android:textSize="20sp"
             android:textColor="?attr/colorOnSecondary"
             tools:text="$1,500.00"

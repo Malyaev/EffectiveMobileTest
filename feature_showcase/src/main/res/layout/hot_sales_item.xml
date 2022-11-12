@@ -33,12 +33,12 @@
             />
 
         <TextView
+            style="@style/Style.App.TextAppearance.Bold"
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:fontFamily="@font/mark_pro_bold"
-            android:textSize="30sp"
+            android:textSize="25sp"
             tools:text="iphone 12"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +46,12 @@
             android:layout_marginTop="59dp"
             />
         <TextView
+            style="@style/Style.App.TextAppearance.Light"
             android:id="@+id/sub_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:fontFamily="@font/mark_pro"
-            android:textSize="13sp"
+            android:textSize="11sp"
             tools:text="Súper. Mega. Rápido."
             app:layout_constraintTop_toBottomOf="@id/title"
             app:layout_constraintStart_toStartOf="parent"
