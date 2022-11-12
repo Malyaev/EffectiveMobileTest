@@ -19,10 +19,10 @@ class BottomViewHelper constructor(val view: ViewGroup){
     private companion object{
         val itemsList: List<Item> =
             listOf(
-                Item(R.id.shop,R.drawable.shop, R.string.explore,ItemType.SHOP),
-                Item(R.id.like,R.drawable.liked, R.string.liked,ItemType.LIKED),
-                Item(R.id.cart,R.drawable.cart, R.string.cart,ItemType.CART),
-                Item(R.id.account,R.drawable.account,R.string.account,ItemType.ACCOUNT)
+                Item(R.id.shop,R.drawable.nav_shop, R.string.explore,ItemType.SHOP),
+                Item(R.id.like,R.drawable.nav_liked, R.string.liked,ItemType.LIKED),
+                Item(R.id.cart,R.drawable.nav_cart, R.string.cart,ItemType.CART),
+                Item(R.id.account,R.drawable.nav_account,R.string.account,ItemType.ACCOUNT)
             )
     }
 
