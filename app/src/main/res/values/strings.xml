@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">EffectiveMobileTest</string>
     <string name="title">Ecommerce\nConcept </string>
+    <string name="explore">Explore</string>
+    <string name="cart">Cart</string>
+    <string name="liked">Liked</string>
+    <string name="account">Account</string>
 </resources>

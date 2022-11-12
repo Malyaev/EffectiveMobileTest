@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingVertical="6dp"
+    android:paddingHorizontal="10dp"
+    android:background="@android:color/transparent"
+    tools:background="?attr/colorPrimary">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        app:tint="?attr/colorOnPrimary"
+        tools:src="@drawable/like"
+        android:layout_gravity="center"
+        />
+
+    <View
+        android:id="@+id/round"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:background="@drawable/round"
+        android:backgroundTint="?attr/colorOnPrimary"
+        android:layout_gravity="center_vertical"
+        />
+
+    <TextView
+        style="@style/Style.App.TextAppearance.Bold"
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="?attr/colorOnPrimary"
+        android:layout_marginStart="16dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="1dp"
+        tools:text="@string/explore"
+        />
+
+</FrameLayout>

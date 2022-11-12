@@ -12,8 +12,18 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         app:defaultNavHost="true"
         app:navGraph="@navigation/app_navigation" />
+
+    <include
+        android:id="@+id/bottom_navigation_view"
+        layout="@layout/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="8dp"
+        />
 
 </FrameLayout>

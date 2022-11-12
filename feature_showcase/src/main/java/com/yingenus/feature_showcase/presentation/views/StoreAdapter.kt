@@ -48,7 +48,8 @@ internal class StoreAdapter( imageLoader: ImageLoader,
             state: RecyclerView.State
         ) {
             val position = parent.getChildLayoutPosition(view)
-            if ( (parent.adapter as StoreAdapter).getItems()?.getOrNull(position) is BestSeller ){
+            val item = (parent.adapter as StoreAdapter).getItems()?.getOrNull(position)
+            if (  item is BestSeller ){
                 val items = (parent.adapter as StoreAdapter).items!!
                 val firstBestSeller = items.indexOfFirst { it is BestSeller }
                 val positionInBestSellers = (items.size - position) - firstBestSeller
@@ -62,6 +63,10 @@ internal class StoreAdapter( imageLoader: ImageLoader,
                     outRect.right += paddings
                     outRect.left += (paddings/2)
                 }
+            }
+            val itemsCount = parent.adapter!!.itemCount
+            if ( (position == itemsCount-2 && item is BestSeller) || position == itemsCount-1){
+                outRect.bottom += (100).dp2px(parent.context)
             }
         }
     }

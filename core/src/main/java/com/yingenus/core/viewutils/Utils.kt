@@ -7,10 +7,6 @@ import androidx.core.view.children
 import kotlin.reflect.KClass
 
 
-fun <T : View> View.findViewByClass(){
-
-}
-
 fun <T : View> View.findView( clazz: Class<T>): T?{
     if ( clazz.isAssignableFrom(this::class.java)) return this as T
     else if (this is ViewGroup){

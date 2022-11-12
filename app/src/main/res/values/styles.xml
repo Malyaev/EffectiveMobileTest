@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Style.App.ButtonNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="shapeAppearanceOverlay">@style/Style.App.Rounded</item>
+        <item name="shapeAppearance">@style/Style.App.Rounded</item>
+    </style>
+</resources>

@@ -1,6 +1,7 @@
 package com.yingenus.feature_showcase.presentation.views
 
 import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.core.colors.resolveColorAttr
+import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.feature_showcase.R
 import com.yingenus.feature_showcase.domain.dto.Location
 import com.yingenus.feature_showcase.presentation.adapterItem.*
