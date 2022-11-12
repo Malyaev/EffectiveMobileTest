@@ -9,19 +9,16 @@ import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import android.widget.ImageButton
-import androidx.core.view.children
-import androidx.core.view.get
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textfield.TextInputLayout
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.yingenus.api_network.api.ImageLoader
+import com.yingenus.core.colors.resolveColorAttr
 import com.yingenus.feature_showcase.R
 import com.yingenus.feature_showcase.domain.dto.Location
 import com.yingenus.feature_showcase.presentation.adapterItem.*
@@ -30,11 +27,8 @@ import com.yingenus.feature_showcase.presentation.adapterItem.HotSales
 import com.yingenus.feature_showcase.presentation.adapterItem.HotSalesItem
 import com.yingenus.feature_showcase.presentation.adapterItem.ShopItem
 import com.yingenus.feature_showcase.presentation.adapterdelegate.*
-import com.yingenus.feature_showcase.presentation.adapterdelegate.getBestSalterAdapterDelegate
 import com.yingenus.feature_showcase.presentation.adapterdelegate.getCategoryAdapterDelegate
-import com.yingenus.feature_showcase.presentation.adapterdelegate.getHeaderAdapterDelegate
 import com.yingenus.feature_showcase.presentation.adapterdelegate.getHotSalesAdapterDelegate
-import com.yingenus.feature_showcase.presentation.adapterdelegate.getHotSalesContainerAdapterDelegate
 import com.yingenus.feature_showcase.presentation.viewmodels.ComponentViewModel
 import com.yingenus.feature_showcase.presentation.viewmodels.ShowCaseViewModel
 import kotlinx.coroutines.flow.*
@@ -137,6 +131,7 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
 
     override fun onStart() {
         super.onStart()
+        requireActivity().window.navigationBarColor = requireContext().resolveColorAttr(androidx.appcompat.R.attr.background)
         showCaseViewModel.updateViewModel()
     }
 

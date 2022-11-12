@@ -2,18 +2,14 @@ package com.yingenus.feature_product_details.presentation.view
 
 import android.content.Context
 import android.graphics.Rect
-import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,12 +19,12 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.tabs.TabLayout
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.yingenus.core.ImageUtils.isChecked
 import com.yingenus.api_network.api.ImageLoader
+import com.yingenus.core.colors.resolveColorAttr
 import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.core.viewutils.findView
 import com.yingenus.feature_product_details.R
@@ -144,6 +140,7 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
 
     override fun onStart() {
         super.onStart()
+        requireActivity().window.navigationBarColor = requireContext().resolveColorAttr(com.google.android.material.R.attr.colorSurface)
         productViewModel.update()
     }
 

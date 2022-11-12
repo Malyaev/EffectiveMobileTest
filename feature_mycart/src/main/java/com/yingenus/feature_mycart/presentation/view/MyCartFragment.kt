@@ -13,13 +13,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.yingenus.api_network.api.ImageLoader
+import com.yingenus.core.colors.resolveColorAttr
 import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.core.textutils.convertPrise
 import com.yingenus.feature_mycart.R
-import com.yingenus.feature_mycart.domain.dto.BasketProduct
 import com.yingenus.feature_mycart.domain.dto.Delivery
 import com.yingenus.feature_mycart.presentation.adapterdelegate.getProductDelegate
 import com.yingenus.feature_mycart.presentation.adapteritem.BasketItem
@@ -104,6 +103,7 @@ internal class MyCartFragment : Fragment(R.layout.my_cart_fragment) {
     override fun onStart() {
         super.onStart()
         myCartViewModel.update()
+        requireActivity().window.navigationBarColor = requireContext().resolveColorAttr(androidx.appcompat.R.attr.colorPrimary)
     }
 
     override fun onDestroyView() {
