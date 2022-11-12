@@ -3,8 +3,8 @@
     <item  android:color="?attr/colorSecondary" android:state_enabled="true" android:state_selected="true"/>
     <item  android:color="?attr/colorSecondary" android:state_enabled="true" android:state_checked="true"/>
 
-    <item  android:color="?android:colorBackground" android:state_enabled="false"/>
-    <item  android:color="?android:colorBackground" android:state_checked="false"/>
+    <item  android:color="?attr/colorOnPrimary" android:state_enabled="false"/>
+    <item  android:color="?attr/colorOnPrimary" android:state_checked="false"/>
 
-    <item android:alpha="1" android:color="?android:colorBackground"/>
+    <item android:alpha="1" android:color="?attr/colorOnPrimary"/>
 </selector>

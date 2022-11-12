@@ -38,6 +38,8 @@
                 android:background="?attr/background"
                 app:expandedTitleTextAppearance="@style/Style.FeatureMyCart.TextAppearance.Toolbar.Expanded"
                 app:collapsedTitleTextAppearance="@style/Style.FeatureMyCart.TextAppearance.Toolbar"
+                app:collapsedTitleTextColor="?attr/colorPrimary"
+                app:expandedTitleTextColor="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:expandedTitleMarginBottom="50dp"
                 >

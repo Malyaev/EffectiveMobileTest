@@ -2,8 +2,10 @@ package com.yingenus.feature_product_details.presentation.view
 
 import android.content.Context
 import android.graphics.Rect
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +27,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.tabs.TabLayout
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
-import com.yingenus.ImageUtils.isChecked
+import com.yingenus.core.ImageUtils.isChecked
 import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.core.sizeutils.dp2px
+import com.yingenus.core.viewutils.findView
 import com.yingenus.feature_product_details.R
 import com.yingenus.feature_product_details.presentation.adapterelegat.getImageAdapterDelegate
 import com.yingenus.feature_product_details.presentation.adapteritem.Image
@@ -100,6 +103,10 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
         stars = view.findViewById(R.id.stars)
 
         tabbar = view.findViewById(R.id.tab_layout)
+        tabbar!!.getTabAt(0)!!.view.findView(TextView::class.java)?.let {
+            Log.d("findView", "finded")
+            it.typeface = resources.getFont(com.yingenus.ui_components.R.font.mark_pro_bold)
+        }
         tabbar!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab!!.id){
@@ -107,16 +114,23 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
                     R.id.details -> tabbar!!.getTabAt(0)!!.select()
                     R.id.feature -> tabbar!!.getTabAt(0)!!.select()
                 }
+                tab.view.findView(TextView::class.java)?.let {
+                    Log.d("findView", "finded")
+                    it.typeface = resources.getFont(com.yingenus.ui_components.R.font.mark_pro_bold)
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-                //TODO("Not yet implemented")
+                tab!!.view.findView(TextView::class.java)?.let {
+                    it.typeface = resources.getFont(com.yingenus.ui_components.R.font.mark_pro_light)
+                }
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 //TODO("Not yet implemented")
             }
         })
+
 
         val dialog = view.findViewById<View>(R.id.button_dialog)
         initDialog(dialog,imageViewPager!!)

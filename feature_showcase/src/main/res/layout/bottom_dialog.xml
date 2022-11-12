@@ -27,7 +27,7 @@
         />
 
     <ImageButton
-        style="@style/Style.FetureShowcase.Button.Square"
+        style="@style/Style.App.ImageButton.Square"
         android:id="@+id/close"
         android:layout_width="37dp"
         android:layout_height="37dp"

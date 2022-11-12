@@ -153,7 +153,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="36dp"
         android:layout_marginTop="22dp"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginHorizontal="18dp"
         app:cardElevation="0dp"
         android:backgroundTint="?attr/colorSecondary"
         android:clickable="true"
@@ -168,7 +168,7 @@
             android:textColor="?attr/colorOnSecondary"
             android:text="@string/add_to_cart"
             android:layout_gravity="center_vertical|start"
-            android:layout_marginStart="45dp"
+            android:layout_marginStart="18dp"
             />
 
         <TextView
@@ -180,7 +180,7 @@
             android:textColor="?attr/colorOnSecondary"
             tools:text="$1,500.00"
             android:layout_gravity="center_vertical|end"
-            android:layout_marginEnd="38dp"
+            android:layout_marginEnd="18dp"
             />
 
     </com.google.android.material.card.MaterialCardView>

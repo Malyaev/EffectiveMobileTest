@@ -1,4 +1,4 @@
-package com.yingenus.ImageUtils
+package com.yingenus.core.ImageUtils
 
 import android.widget.ImageButton
 

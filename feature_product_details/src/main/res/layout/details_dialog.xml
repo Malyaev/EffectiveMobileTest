@@ -32,7 +32,7 @@
 
         <ImageButton
             android:id="@+id/like"
-            style="@style/Style.FeatureProduct.ImageButton.Square"
+            style="@style/Style.App.ImageButton.Square"
             android:layout_width="37dp"
             android:layout_height="37dp"
             android:src="@drawable/like_checkbox"

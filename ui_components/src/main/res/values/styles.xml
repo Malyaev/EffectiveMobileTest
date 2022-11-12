@@ -32,11 +32,21 @@
         <item name="backgroundTint">?attr/colorSurface</item>
     </style>
     <style name="Style.App.ImageButton.Round" parent="Widget.AppCompat.ImageButton">
-        <item name="android:background">@drawable/round</item>
+        <item name="android:background">@drawable/round_ripple</item>
+    </style>
+    <style name="Style.App.ImageButton.Round.Secondary">
+        <item name="android:background">@drawable/round_secondary_ripple</item>
+    </style>
+    <style name="Style.App.ImageButton.Round.onSecondary">
+        <item name="android:background">@drawable/round_on_secondary_ripple</item>
     </style>
     <style name="Style.App.ImageButton.Square" parent="Widget.AppCompat.ImageButton">
-        <item name="android:background">@drawable/square</item>
+        <item name="android:background">@drawable/square_ripple</item>
     </style>
+    <style name="Style.App.ImageButton.Square.Secondary" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/square_secondary_ripple</item>
+    </style>
+    <style name="Style.App.ImageButton" parent="Widget.AppCompat.ImageButton"/>
     <style name="Style.App.Button.Filled.Secondary">
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="backgroundTint">?attr/colorSecondary</item>

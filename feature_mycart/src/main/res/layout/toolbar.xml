@@ -21,12 +21,11 @@
             android:layout_marginStart="20dp"/>
 
         <ImageButton
-            style="@style/Style.App.ImageButton.Square"
+            style="@style/Style.App.ImageButton.Square.Secondary"
             android:id="@+id/location"
             android:layout_width="37dp"
             android:layout_height="37dp"
             android:src="@drawable/location"
-            android:backgroundTint="?attr/colorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

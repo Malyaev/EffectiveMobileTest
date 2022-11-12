@@ -14,7 +14,7 @@
 
         <ImageButton
             android:id="@+id/back"
-            style="@style/Style.FeatureProduct.ImageButton.Square"
+            style="@style/Style.App.ImageButton.Square"
             android:layout_width="37dp"
             android:layout_height="37dp"
             android:src="@drawable/back"
@@ -27,12 +27,11 @@
 
         <ImageButton
             android:id="@+id/cart"
-            style="@style/Style.FeatureProduct.ImageButton.Square"
+            style="@style/Style.App.ImageButton.Square.Secondary"
             android:layout_width="37dp"
             android:layout_height="37dp"
             android:src="@drawable/cart"
             app:tint="?attr/colorOnPrimary"
-            android:backgroundTint="?attr/colorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

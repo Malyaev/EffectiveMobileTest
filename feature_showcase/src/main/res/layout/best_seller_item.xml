@@ -24,6 +24,7 @@
             />
 
         <ImageButton
+            style="@style/Style.App.ImageButton.Round.onSecondary"
             android:id="@+id/like"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -33,9 +34,6 @@
             android:layout_marginTop="11dp"
             android:layout_marginEnd="15dp"
             android:src="@drawable/like_checkbox"
-            android:background="@drawable/round"
-            android:backgroundTint="@color/white"
-
             />
 
         <TextView

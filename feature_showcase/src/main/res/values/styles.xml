@@ -14,11 +14,13 @@
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="fontFamily">@font/mark_pro_normal</item>
     </style>
-    <style name="Style.FetureShowcase.TextInputLayout.OnBackground" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+    <style name="Style.FetureShowcase.TextInputLayout.OnBackground" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeWidth">0dp</item>
-        <item name="backgroundTint">?attr/colorSurface</item>
+        <item name="hintEnabled">false</item>
+        <item name="boxBackgroundColor">?attr/colorSurface</item>
         <item name="hintTextColor">?attr/hintTextColor</item>
         <item name="shapeAppearanceOverlay">@style/Style.FetureShowcase.Rounded</item>
+        <item name="editTextStyle">@style/Style.FetureShowcase.EditText.OnBackground</item>
     </style>
     <style name="Style.FetureShowcase.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeWidth">1dp</item>
@@ -36,8 +38,8 @@
         <item name="fontFamily">@font/mark_pro_light</item>
     </style>
     <style name="Style.FetureShowcase.EditText.OnBackground" parent="Widget.AppCompat.EditText">
-        <item name="android:textSize">19sp</item>
-        <item name="android:textColor">@color/dark_violet</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
         <item name="fontFamily">@font/mark_pro_normal</item>
         <item name="backgroundTint">?attr/colorSurface</item>
     </style>
@@ -49,7 +51,8 @@
     </style>
     <style name="Style.FetureShowcase.Button.Filled.HotSales" parent="Style.FetureShowcase.Button.Filled">
         <item name="android:textColor">?attr/colorPrimary</item>
-        <item name="backgroundTint">@color/white</item>
+        <item name="backgroundTint">?attr/colorSurface</item>
+        <item name="rippleColor">?attr/colorPrimary</item>
         <item name="textAppearanceButton">@style/Style.FetureShowcase.TextAppearance.Button.HotSales</item>
         <item name="android:textAppearance">@style/Style.FetureShowcase.TextAppearance.Button.HotSales</item>
     </style>

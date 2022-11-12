@@ -53,6 +53,7 @@ class ShopFragment : Fragment(R.layout.shop_fragment) {
         camera = view.findViewById(R.id.camera_info)
         ram = view.findViewById(R.id.ram_info)
         storage = view.findViewById(R.id.storage_info)
+        prise = view.findViewById(R.id.prise)
 
         colorChipGroup = view.findViewById(R.id.color_chip)
         colorChipGroup!!.setOnCheckedStateChangeListener { group, checkedIds ->
@@ -99,7 +100,9 @@ class ShopFragment : Fragment(R.layout.shop_fragment) {
             productViewModel.sd.onEach { ram!!.text = it }.collect()
         }
         lifecycleScope.launchWhenStarted {
-            productViewModel.prise.onEach { prise!!.text = it.convertPrise("$",2,"us")}
+            productViewModel.prise.onEach {
+                prise!!.text = it.convertPrise("$",2,"us")
+            }.collect()
         }
         lifecycleScope.launchWhenStarted {
             productViewModel.colors.onEach {

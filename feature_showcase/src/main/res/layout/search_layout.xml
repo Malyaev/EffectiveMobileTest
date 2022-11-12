@@ -11,7 +11,10 @@
         style="@style/Style.FetureShowcase.TextInputLayout.OnBackground"
         android:layout_width="300dp"
         android:layout_height="34dp"
+        app:helperText="@string/search"
+        app:helperTextEnabled="true"
         android:hint="@string/search"
+        app:helperTextTextColor="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/qrButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -26,12 +29,14 @@
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:text="some text" />
+            android:maxLines="1"
+            android:padding="0dp"
+            tools:text="syme text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
         android:id="@+id/qrButton"
-        style="@style/Style.FetureShowcase.Button.Round.Secondary"
+        style="@style/Style.App.ImageButton.Round.Secondary"
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:src="@drawable/qr"
