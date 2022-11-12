@@ -1,17 +1,22 @@
 package com.yingenus.feature_mycart.presentation.view
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
+import com.yingenus.api_network.api.ImageLoader
+import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.core.textutils.convertPrise
 import com.yingenus.feature_mycart.R
 import com.yingenus.feature_mycart.domain.dto.BasketProduct
@@ -28,11 +33,13 @@ import javax.inject.Provider
 
 internal class MyCartFragment : Fragment(R.layout.my_cart_fragment) {
 
+    @Inject
+    lateinit var imageLoader: ImageLoader
+
     private val componentViewModule: ComponentViewModel by viewModels()
     @Inject
     lateinit var myCartViewModelProvider: Provider<MyCartViewModel.MyCartViewModelProvider>
     private val myCartViewModel : MyCartViewModel by viewModels{
-        componentViewModule.getFeatureComponent().injectMyCartFragment(this)
         myCartViewModelProvider.get()
     }
 
@@ -41,6 +48,11 @@ internal class MyCartFragment : Fragment(R.layout.my_cart_fragment) {
     private var basketRecycler : RecyclerView? = null
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        componentViewModule.getFeatureComponent().injectMyCartFragment(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,10 +60,10 @@ internal class MyCartFragment : Fragment(R.layout.my_cart_fragment) {
     ): View {
         val view = super.onCreateView(inflater, container, savedInstanceState)!!
 
-        view.findViewById<Button>(R.id.back).setOnClickListener {
+        view.findViewById<ImageButton>(R.id.back).setOnClickListener {
             findNavController().popBackStack()
         }
-        view.findViewById<Button>(R.id.location).setOnClickListener {
+        view.findViewById<ImageButton>(R.id.location).setOnClickListener {
             addAddress()
         }
         view.findViewById<Button>(R.id.checkout).setOnClickListener {
@@ -62,7 +74,7 @@ internal class MyCartFragment : Fragment(R.layout.my_cart_fragment) {
         basketRecycler = view.findViewById(R.id.recycler)
 
         basketRecycler!!.adapter = ListDelegationAdapter<List<BasketItem>>(
-            getProductDelegate({
+            getProductDelegate(imageLoader,{
                     myCartViewModel.addItemFromBasketItem(it.basketProduct,1) },
                 {
                     myCartViewModel.deleteItemFromBasketItem(it.basketProduct,1)},
@@ -70,14 +82,28 @@ internal class MyCartFragment : Fragment(R.layout.my_cart_fragment) {
                     myCartViewModel.deleteBasketItem(it.basketProduct)})
         )
 
-        subscribeToViewModel()
+        basketRecycler!!.addItemDecoration(object : RecyclerView.ItemDecoration(){
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                val position = parent.getChildLayoutPosition(view)
+                if (position == 0) outRect.top += (30).dp2px(requireContext())
+                else outRect.top += (6).dp2px(requireContext())
+                outRect.bottom += (6).dp2px(requireContext())
+            }
+        })
 
+        subscribeToViewModel()
 
         return view
     }
 
     override fun onStart() {
         super.onStart()
+        myCartViewModel.update()
     }
 
     override fun onDestroyView() {
@@ -104,7 +130,12 @@ internal class MyCartFragment : Fragment(R.layout.my_cart_fragment) {
                     is Delivery.Free ->
                         getString(R.string.delivery_free)
                 }
-            }
+            }.collect()
+        }
+        lifecycleScope.launchWhenStarted {
+            myCartViewModel.total.onEach {
+                total!!.text = it.convertPrise("$",2)
+            }.collect()
         }
         lifecycleScope.launchWhenStarted {
             myCartViewModel.error.onEach {

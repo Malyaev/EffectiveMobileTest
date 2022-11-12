@@ -13,7 +13,7 @@ fun Int.convertPrise(
                 .let {
                     if (afterNullDigs == 0) it
                     else StringBuilder(it)
-                        .append(".").also{ sb : StringBuilder -> repeat(afterNullDigs){ sb.append(".")} }.toString()
+                        .append(".").also{ sb : StringBuilder -> repeat(afterNullDigs){ sb.append("0")} }.toString()
                 })
                 .format(this)
 }

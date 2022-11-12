@@ -79,6 +79,7 @@
     
     <com.google.android.material.button.MaterialButton
         style="@style/Style.FeatureMyCart.Button.Checkout"
+        android:id="@+id/checkout"
         android:backgroundTint="?attr/colorSecondary"
         android:layout_width="match_parent"
         android:text="@string/checkout"
