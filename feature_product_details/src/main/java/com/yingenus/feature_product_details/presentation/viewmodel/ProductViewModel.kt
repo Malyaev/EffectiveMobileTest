@@ -4,13 +4,13 @@ import android.graphics.Color
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.yingenus.feature_product_details.domain.ProductRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Provider
 
 
@@ -86,8 +86,35 @@ internal class ProductViewModel @AssistedInject constructor(
     val colors : StateFlow<List<Int>>
         get() = _colors.asStateFlow()
 
-    fun update(){
+    private val _error : MutableStateFlow<String?> = MutableStateFlow(null)
+    val error : StateFlow<String?>
+        get() = _error.asStateFlow()
 
+    fun update(){
+        productRepository
+            .getProductDetailed(productId)
+            .onEach {
+                when(it){
+                    is com.yingenus.core.Result.Success ->{
+                        _cpu.emit(it.value.cpu)
+                        _colors.emit(it.value.color.map { Color.parseColor(it) })
+                        _camera.emit(it.value.camera)
+                        _capacity.emit(it.value.capacity)
+                        _isFavorites.emit(it.value.isFavorites)
+                        _prise.emit(it.value.price)
+                        _productPhotos.emit(it.value.images)
+                        _rating.emit(it.value.rating.toInt())
+                        _sd.emit(it.value.sd)
+                        _ssd.emit(it.value.ssd)
+                        _title.emit(it.value.title)
+                    }
+                    is com.yingenus.core.Result.Error ->{
+                        _error.emit(it.error.message)
+                    }
+                    else ->{}
+                }
+            }
+            .launchIn(viewModelScope)
     }
 
     fun setSelectedColor(int : Int){

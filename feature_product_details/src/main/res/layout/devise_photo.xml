@@ -3,16 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="266dp"
-    android:layout_height="335dp"
-    app:cardElevation="10dp"
+    android:clipToPadding="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     app:cardCornerRadius="20dp">
 
     <ImageView
         android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         tools:src="@sample/devise"
         />
 

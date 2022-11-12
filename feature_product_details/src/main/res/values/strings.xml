@@ -6,4 +6,5 @@
     <string name="add_to_cart">Add to Cart</string>
     <string name="product_details">Product Details</string>
     <style name="storage_size">%1$s GB</style>
+    <string name="select_title">Select color and capacity</string>
 </resources>

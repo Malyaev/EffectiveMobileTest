@@ -1,6 +1,7 @@
 package com.yingenus.feature_showcase.presentation.views
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -215,7 +216,8 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
     }
 
     private fun openBestSeller(bestSeller: BestSeller){
-
+        val uri = Uri.parse("App://feature_product/product/${bestSeller.bestSellerProduct.id}")
+        findNavController().navigate(uri)
     }
 
     private fun viewAllBestSeller(){
@@ -223,7 +225,8 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
     }
 
     private fun openHotSale(hotSales: HotSales){
-
+        val uri = Uri.parse("App://feature_product/product/${hotSales.hotSalesProduct.id}")
+        findNavController().navigate(uri)
     }
 
     private fun viewAllHotSale(){

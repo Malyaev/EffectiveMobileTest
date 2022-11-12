@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,35 +8,33 @@
     android:clipToPadding="false"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:clipToPadding="false"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        >
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/image_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="380dp"
-            />
+                android:id="@+id/image_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="380dp"
+                />
 
-        <FrameLayout
-            android:id="@+id/button_dialog"
-            style="@style/Style.FeatureProduct.BottomSheet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="20dp"
-            android:clipToPadding="false"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-            <include layout="@layout/details_dialog"/>
 
-        </FrameLayout>
+
+                <include
+                    style="@style/Style.App.SheetDialog.Rounded"
+                    android:id="@+id/button_dialog"
+                    layout="@layout/details_dialog"
+                    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
 
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    
 
+    <include layout="@layout/product_toolbar" />
 
-</LinearLayout>
+</FrameLayout>

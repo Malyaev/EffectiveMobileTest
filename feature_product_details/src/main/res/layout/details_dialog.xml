@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:minHeight="370dp"
+    android:elevation="20dp"
+    android:background="@drawable/bottom_dialog_shape"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="28dp"
-            android:layout_marginStart="38dp"
+            android:layout_marginStart="18dp"
             />
 
         <ImageButton
@@ -37,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/product_name"
             app:layout_constraintTop_toTopOf="@id/product_name"
-            android:layout_marginEnd="37dp"
+            android:layout_marginEnd="18dp"
             />
 
         <com.google.android.material.chip.ChipGroup
@@ -78,8 +81,8 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorSurface"
             app:layout_constraintTop_toBottomOf="@+id/stars"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="27dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="8dp"
             >
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/shop"
@@ -104,10 +107,11 @@
             android:layout_height="wrap_content"
             tools:layout_height="200dp"
             app:layout_constraintTop_toBottomOf="@id/tab_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/details_dialog"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>
 

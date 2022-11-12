@@ -10,6 +10,8 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -17,15 +19,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.tabs.TabLayout
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
+import com.yingenus.ImageUtils.isChecked
 import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.feature_product_details.R
 import com.yingenus.feature_product_details.presentation.adapterelegat.getImageAdapterDelegate
 import com.yingenus.feature_product_details.presentation.adapteritem.Image
 import com.yingenus.feature_product_details.presentation.adapteritem.ImageItem
+import com.yingenus.feature_product_details.presentation.adapters.ProductInfoAdapter
 import com.yingenus.feature_product_details.presentation.viewmodel.ComponentViewModel
 import com.yingenus.feature_product_details.presentation.viewmodel.ProductViewModel
 import com.yingenus.feature_product_details.presentation.viewmodel.ProductViewModelFactory
@@ -73,18 +79,18 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
         imageViewPager = view.findViewById(R.id.image_view_pager)
         detailsViewPager = view.findViewById<ViewPager2?>(R.id.details_pager).also {
             it.isUserInputEnabled = false
+            it.adapter = ProductInfoAdapter(this)
         }
 
-        view.findViewById<Button>(R.id.back).setOnClickListener {
+        view.findViewById<ImageButton>(R.id.back).setOnClickListener {
             findNavController().popBackStack()
         }
-        view.findViewById<Button>(R.id.cart).setOnClickListener {
+        view.findViewById<ImageButton>(R.id.cart).setOnClickListener {
             showCart()
         }
 
         likeButton = view.findViewById<ImageButton?>(R.id.like).also {
             it.setOnClickListener {
-                it.isSelected = !it.isSelected
                 productViewModel.likeProduct(it.isSelected)
             }
         }
@@ -110,6 +116,9 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
                 //TODO("Not yet implemented")
             }
         })
+
+        val dialog = view.findViewById<View>(R.id.button_dialog)
+        initDialog(dialog,imageViewPager!!)
 
         initImageViewPager()
 
@@ -145,7 +154,7 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
         lifecycleScope.launchWhenStarted {
             productViewModel.title.onEach {
                 title!!.text = it
-            }
+            }.collect()
         }
         lifecycleScope.launchWhenStarted {
             productViewModel.rating.onEach {
@@ -154,7 +163,7 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
         }
         lifecycleScope.launchWhenStarted {
             productViewModel.isFavorites.onEach {
-                likeButton!!.isSelected = it
+                likeButton!!.isChecked(it)
             }.collect()
         }
     }
@@ -186,15 +195,53 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
         val outItemVisible = (30).dp2px(requireContext())
         val currentItemHorizontalMargin = (50).dp2px(requireContext())
         val pageTranslationX = outItemVisible + currentItemHorizontalMargin
+        val pageTranslationZ = (10).dp2px(requireContext())
         val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
             page.translationX = -pageTranslationX * position
-            page.alpha = 0.25f + (1 - abs(position))
+            page.translationZ = pageTranslationZ*(1-abs(position))
+            page.scaleY = 1 - (0.1f * abs(position))
         }
+
         imageViewPager!!.setPageTransformer(pageTransformer)
+
+
 
         val itemDecoration = HorizontalMarginItemDecoration( (50).dp2px(requireContext()))
         imageViewPager!!.addItemDecoration(itemDecoration)
+        imageViewPager!!.addItemDecoration(VerticalMarginItemDecoration((20).dp2px(requireContext())))
 
+    }
+
+    private fun initDialog( view: View, topView: View){
+        val heightSpec = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED)
+        val widthSpec = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED)
+        topView.measure(heightSpec,widthSpec)
+        val topViewHeight = topView.measuredHeight
+
+        val height = getDisplayHeight(requireContext()) -
+                getStatusBarHeight() -
+                (56).dp2px(requireContext()) -
+                (30).dp2px(requireContext()) -
+                (380).dp2px(requireContext())
+
+        val  behavior = (view.layoutParams as CoordinatorLayout.LayoutParams).behavior as BottomSheetBehavior
+        behavior.peekHeight = max(height,(50).dp2px(requireContext()))
+        behavior.isDraggable = true
+    }
+
+    private fun getStatusBarHeight(): Int{
+        var result = 0
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            result = resources.getDimensionPixelSize(resourceId)
+        }
+        return result
+    }
+
+    private fun getDisplayHeight(context : Context): Int =  try {
+        context.display!!.height
+    } catch (e : NoSuchMethodError){
+        context.resources.displayMetrics.heightPixels
     }
 
     private class HorizontalMarginItemDecoration(private val horizontalMargin: Int) :
@@ -205,6 +252,18 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
         ) {
             outRect.right = horizontalMargin
             outRect.left = horizontalMargin
+        }
+
+    }
+
+    private class VerticalMarginItemDecoration(private val verticalMargin: Int) :
+        RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
+        ) {
+            outRect.top = verticalMargin
+            outRect.bottom = verticalMargin
         }
 
     }

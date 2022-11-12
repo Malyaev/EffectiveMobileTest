@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -133,13 +134,13 @@ class ShopFragment : Fragment(R.layout.shop_fragment) {
             val inflater = requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
             sizes.onEach {
-                val view = inflater.inflate(R.layout.storage_chip, colorChipGroup,false) as Chip
+                val view = inflater.inflate(R.layout.storage_chip, storageChipGroup,false) as Chip
                 view.text = it
                 view.id = it.hashCode()
                 view.tag = it
-                colorChipGroup!!.addView(view)
+                storageChipGroup!!.addView(view)
             }
-            colorChipGroup!!.check(sizes.first().hashCode())
+            storageChipGroup!!.check(sizes.first().hashCode())
             productViewModel.setSelectedStorageSize(sizes.first())
         }
     }
