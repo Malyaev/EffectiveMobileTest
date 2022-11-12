@@ -2,6 +2,7 @@ package com.yingenus.feature_product_details.presentation.view
 
 import android.content.Context
 import android.graphics.Rect
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -170,7 +171,8 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
 
 
     private fun showCart(){
-        TODO()
+        val uri = Uri.parse("App://feature_my_chart/")
+        findNavController().navigate(uri)
     }
 
     private fun setRating(rating : Int){
