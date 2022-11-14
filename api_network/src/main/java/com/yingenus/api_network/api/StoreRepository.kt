@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 import com.yingenus.core.Result
 
 interface StoreRepository {
-    fun getShowcase(): Flow<Result<Showcase>>
+    suspend fun getShowcase(): Result<Showcase>
 }

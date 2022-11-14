@@ -53,25 +53,20 @@ internal class StoreRepositoryImpl @Inject constructor(val networkApi: NetworkAp
         networkApi.getStoreRepository()
     }
 
-    override fun getHomeShowcase(): Flow<Result<HomeShowcase>> {
-        return apiStoreRepository.getShowcase().map {
-            if (it is Result.Success) Result.Success(it.value.toHomeShowcase())
-            else it as Result<HomeShowcase>
-        }
+    override suspend fun getHomeShowcase(): Result<HomeShowcase> {
+        val result = apiStoreRepository.getShowcase()
+        return if (result is Result.Success) Result.Success(result.value.toHomeShowcase())
+        else result as Result<HomeShowcase>
     }
 
-    override fun likeBestSeller(bestSeller: BestSellerProduct, isFavorites : Boolean): Flow<Result<BestSellerProduct>> {
-        return flow {
-            emit(Result.Success(BestSellerProduct(
+    override suspend fun likeBestSeller(bestSeller: BestSellerProduct, isFavorites : Boolean): Result<BestSellerProduct> {
+        return Result.Success(BestSellerProduct(
                 bestSeller.id,
                 bestSeller.discountPrise,
                 isFavorites,
                 bestSeller.picture,
                 bestSeller.priceWithoutDiscount,
                 bestSeller.title
-            )))
-        }
-
-
+            ))
     }
 }

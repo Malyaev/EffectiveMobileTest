@@ -4,6 +4,6 @@ import com.yingenus.feature_showcase.domain.dto.Location
 import kotlinx.coroutines.flow.Flow
 
 internal interface LocationRepository {
-    fun getSelectedLocation(): Flow<Location>
-    fun getAllLocations(): Flow<List<Location>>
+    suspend fun getSelectedLocation(): Location
+    suspend fun getAllLocations(): List<Location>
 }

@@ -9,6 +9,7 @@ import com.yingenus.feature_product_details.domain.ProductRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Provider
@@ -86,35 +87,33 @@ internal class ProductViewModel @AssistedInject constructor(
     val colors : StateFlow<List<Int>>
         get() = _colors.asStateFlow()
 
-    private val _error : MutableStateFlow<String?> = MutableStateFlow(null)
-    val error : StateFlow<String?>
-        get() = _error.asStateFlow()
+    private val _error : Channel<String?> = Channel()
+    val error : Flow<String?>
+        get() = _error.receiveAsFlow()
 
     fun update(){
-        productRepository
-            .getProductDetailed(productId)
-            .onEach {
-                when(it){
-                    is com.yingenus.core.Result.Success ->{
-                        _cpu.emit(it.value.cpu)
-                        _colors.emit(it.value.color.map { Color.parseColor(it) })
-                        _camera.emit(it.value.camera)
-                        _capacity.emit(it.value.capacity)
-                        _isFavorites.emit(it.value.isFavorites)
-                        _prise.emit(it.value.price)
-                        _productPhotos.emit(it.value.images)
-                        _rating.emit(it.value.rating.toInt())
-                        _sd.emit(it.value.sd)
-                        _ssd.emit(it.value.ssd)
-                        _title.emit(it.value.title)
-                    }
-                    is com.yingenus.core.Result.Error ->{
-                        _error.emit(it.error.message)
-                    }
-                    else ->{}
+        viewModelScope.launch {
+            val result = productRepository.getProductDetailed(productId)
+            when (result) {
+                is com.yingenus.core.Result.Success -> {
+                    _cpu.emit(result.value.cpu)
+                    _colors.emit(result.value.color.map { Color.parseColor(it) })
+                    _camera.emit(result.value.camera)
+                    _capacity.emit(result.value.capacity)
+                    _isFavorites.emit(result.value.isFavorites)
+                    _prise.emit(result.value.price)
+                    _productPhotos.emit(result.value.images)
+                    _rating.emit(result.value.rating.toInt())
+                    _sd.emit(result.value.sd)
+                    _ssd.emit(result.value.ssd)
+                    _title.emit(result.value.title)
                 }
+                is com.yingenus.core.Result.Error -> {
+                    _error.send(result.error.message)
+                }
+                else -> {}
             }
-            .launchIn(viewModelScope)
+        }
     }
 
     fun setSelectedColor(int : Int){

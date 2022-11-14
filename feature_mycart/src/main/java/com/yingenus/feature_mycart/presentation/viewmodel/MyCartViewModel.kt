@@ -7,6 +7,7 @@ import com.yingenus.feature_mycart.domain.repository.CartRepository
 import com.yingenus.feature_mycart.domain.dto.BasketProduct
 import com.yingenus.feature_mycart.domain.dto.Cart
 import com.yingenus.feature_mycart.domain.dto.Delivery
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,19 +40,18 @@ internal class MyCartViewModel @Inject constructor(
     val total : StateFlow<Int>
         get() = _total.asStateFlow()
 
-    private val _error : MutableStateFlow<String?> = MutableStateFlow(null)
-    val error : StateFlow<String?>
-        get() = _error.asStateFlow()
+    private val _error : Channel<String?> = Channel()
+    val error : Flow<String?>
+        get() = _error.receiveAsFlow()
 
     fun update(){
         viewModelScope.launch {
-            cartRepository.getMyCart().onEach {
-                when(it){
-                    is com.yingenus.core.Result.Success -> updateCart(it.value)
-                    is com.yingenus.core.Result.Error -> _error.emit(it.error.toString())
-                    else ->{}
-                }
-            }.collect()
+            val result = cartRepository.getMyCart()
+            when(result){
+                is com.yingenus.core.Result.Success -> updateCart(result.value)
+                is com.yingenus.core.Result.Error -> _error.send(result.error.toString())
+                else ->{}
+            }
         }
     }
 

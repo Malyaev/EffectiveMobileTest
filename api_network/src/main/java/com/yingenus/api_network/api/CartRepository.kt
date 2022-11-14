@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 import com.yingenus.core.Result
 
 interface CartRepository{
-    fun getBasket(): Flow<Result<Cart>>
+    suspend fun getBasket(): Result<Cart>
 }

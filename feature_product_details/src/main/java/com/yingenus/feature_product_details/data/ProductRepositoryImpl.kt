@@ -33,10 +33,9 @@ internal class ProductRepositoryImpl @Inject constructor(
             )
     }
 
-    override fun getProductDetailed( id : Int): Flow<Result<ProductDetailed>> {
-        return  networkApi.getProductRepository().getProduct(id).map {
-            if (it is Result.Success) Result.Success(it.value.toProductDetailed())
-            else it as Result<ProductDetailed>
-        }
+    override suspend fun getProductDetailed( id : Int): Result<ProductDetailed> {
+        val result = networkApi.getProductRepository().getProduct(id)
+        return if (result is Result.Success) Result.Success(result.value.toProductDetailed())
+        else result as Result<ProductDetailed>
     }
 }

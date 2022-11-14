@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 import com.yingenus.core.Result
 
 internal interface ProductRepository {
-    fun getProductDetailed(productId : Int): Flow<Result<ProductDetailed>>
+    suspend fun getProductDetailed(productId : Int): Result<ProductDetailed>
 }

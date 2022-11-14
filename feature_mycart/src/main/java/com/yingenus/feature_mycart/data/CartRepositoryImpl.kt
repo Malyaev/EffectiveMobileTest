@@ -43,10 +43,9 @@ internal class CartRepositoryImpl @Inject constructor(
     }
 
 
-    override fun getMyCart(): Flow<Result<Cart>> {
-        return  networkApi.getCartRepository().getBasket().map {
-            if (it is Result.Success) Result.Success(it.value.toCart())
-            else it as Result<Cart>
-        }
+    override suspend fun getMyCart(): Result<Cart>{
+        val result = networkApi.getCartRepository().getBasket()
+        return if (result is Result.Success) Result.Success(result.value.toCart())
+        else result as Result<Cart>
     }
 }

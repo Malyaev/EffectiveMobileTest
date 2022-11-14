@@ -17,7 +17,7 @@ internal class RetrofitModule {
     @Singleton
     fun provideOkHttrClient(): OkHttpClient{
         return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }
 

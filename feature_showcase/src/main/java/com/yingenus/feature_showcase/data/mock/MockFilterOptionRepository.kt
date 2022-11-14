@@ -7,21 +7,15 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 internal class MockFilterOptionRepository @Inject constructor(): FilterOptionRepository {
-    override fun getBrands(): Flow<List<FilterOption.Brand>> {
-        return flow {
-            emit(listOf(FilterOption.Brand("Samsung"), FilterOption.Brand("Apple")))
-        }
+    override suspend fun getBrands(): List<FilterOption.Brand> {
+        return listOf(FilterOption.Brand("Samsung"), FilterOption.Brand("Apple"))
     }
 
-    override fun getPrises(): Flow<List<FilterOption.Prise>> {
-        return flow {
-            emit(listOf(FilterOption.Prise(0,10000)))
-        }
+    override suspend fun getPrises(): List<FilterOption.Prise> {
+        return listOf(FilterOption.Prise(0,10000))
     }
 
-    override fun getSizes(): Flow<List<FilterOption.Size>> {
-        return flow {
-            emit(listOf(FilterOption.Size(4.5f,5.5f)))
-        }
+    override suspend fun getSizes(): List<FilterOption.Size> {
+        return listOf(FilterOption.Size(4.5f,5.5f))
     }
 }

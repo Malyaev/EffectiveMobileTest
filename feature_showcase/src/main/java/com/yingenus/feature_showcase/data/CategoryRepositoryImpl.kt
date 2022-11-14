@@ -17,18 +17,14 @@ internal class CategoryRepositoryImpl @Inject constructor(private val context: C
     }
 
 
-    override fun getCategories(): Flow<List<Category>> {
-        return flow {
-            emit(
-                listOf(
-                    Category(fileUri("phone.svg"),context.getString(R.string.phones)),
-                    Category(fileUri("computer.svg"),context.getString(R.string.computer)),
-                    Category(fileUri("helth.svg"),context.getString(R.string.health)),
-                    Category(fileUri("books.svg"),context.getString(R.string.books))
-                )
-            )
-        }
-    }
+    override suspend fun getCategories(): List<Category> {
+        return listOf(
+            Category(fileUri("phone.svg"),context.getString(R.string.phones)),
+            Category(fileUri("computer.svg"),context.getString(R.string.computer)),
+            Category(fileUri("helth.svg"),context.getString(R.string.health)),
+            Category(fileUri("books.svg"),context.getString(R.string.books))
+        )
 
+    }
 
 }

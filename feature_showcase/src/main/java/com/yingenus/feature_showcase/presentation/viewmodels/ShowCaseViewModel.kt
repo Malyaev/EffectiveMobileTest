@@ -13,6 +13,7 @@ import com.yingenus.feature_showcase.presentation.adapterItem.BestSeller
 import com.yingenus.feature_showcase.presentation.adapterItem.Category
 import com.yingenus.feature_showcase.presentation.adapterItem.HotSales
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -36,9 +37,9 @@ internal class ShowCaseViewModel  @Inject constructor(
         }
     }
 
-    private val _error : MutableStateFlow<String?> = MutableStateFlow(null)
-    val error : StateFlow<String?>
-        get() = _error.asStateFlow()
+    private val _error : Channel<String?> = Channel()
+    val error : Flow<String?>
+        get() = _error.receiveAsFlow()
 
     private val _categoriesStateFlow: MutableStateFlow<List<Category>>
         = MutableStateFlow( emptyList() )
@@ -60,41 +61,42 @@ internal class ShowCaseViewModel  @Inject constructor(
         get() = _selectedLocation.asStateFlow()
 
     val locations : StateFlow<List<Location>> by lazy{
-        locationRepository.getAllLocations().stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+        flow { emit(locationRepository.getAllLocations()) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
     }
 
     fun updateViewModel(){
-        storeRepository
-            .getHomeShowcase()
-            .onEach {
-                when(it){
+        viewModelScope.launch {
+            launch {
+                val homeShowcase = storeRepository.getHomeShowcase()
+                when(homeShowcase){
                     is com.yingenus.core.Result.Success -> {
-                        _hotSalesStateFlow.emit(it.value.homeStoreProducts
+                        _hotSalesStateFlow.emit(homeShowcase.value.homeStoreProducts
                             .map { HotSales(it) })
-                        _bestSellersStateFlow.emit(it.value.bestSellers
+                        _bestSellersStateFlow.emit(homeShowcase.value.bestSellers
                             .map { BestSeller(it) })
                     }
                     is com.yingenus.core.Result.Error -> {
-                        _error.emit(it.toString())
+                        _error.send(homeShowcase.toString())
                     }
                     else -> Unit
                 }
-            }.launchIn(viewModelScope)
-        locationRepository
-            .getSelectedLocation()
-            .onEach {
-                _selectedLocation.emit(it)
             }
-            .launchIn(viewModelScope)
-        categoryRepository
-            .getCategories()
-            .onEach {
+            launch {
+                val locations = locationRepository
+                    .getSelectedLocation()
+                _selectedLocation.emit(locations)
+            }
+            launch {
+                val category = categoryRepository
+                    .getCategories()
                 _categoriesStateFlow.emit(
-                    it.mapIndexed{ i, c ->
+                    category.mapIndexed{ i, c ->
                         Category(c, i == 0)
                     }
                 )
-            }.launchIn(viewModelScope)
+            }
+        }
     }
     fun categorySelected( category: Category){
         viewModelScope.launch {
@@ -110,24 +112,21 @@ internal class ShowCaseViewModel  @Inject constructor(
 
     fun likeBestSeller( bestSeller: BestSeller, isLicked : Boolean){
         viewModelScope.launch {
-            storeRepository
+            val result = storeRepository
                 .likeBestSeller(bestSeller.bestSellerProduct,isLicked)
-                .onEach { resilt ->
-                    when(resilt){
-                        is com.yingenus.core.Result.Success ->{
-                            val updated = _bestSellersStateFlow.value.map {
-                                if (it.bestSellerProduct.id == resilt.value.id) BestSeller(resilt.value)
-                                else it
-                            }
-                            _bestSellersStateFlow.emit(updated)
-                        }
-                        is com.yingenus.core.Result.Error -> {
-                            _error.emit(resilt.error.message)
-                        }
-                        else -> {}
+            when(result){
+                is com.yingenus.core.Result.Success ->{
+                    val updated = _bestSellersStateFlow.value.map {
+                        if (it.bestSellerProduct.id == result.value.id) BestSeller(result.value)
+                        else it
                     }
-
-                }.collect()
+                    _bestSellersStateFlow.emit(updated)
+                }
+                is com.yingenus.core.Result.Error -> {
+                    _error.send(result.error.message)
+                }
+                else -> {}
+            }
         }
     }
 

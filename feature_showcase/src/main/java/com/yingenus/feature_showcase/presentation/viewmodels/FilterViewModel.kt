@@ -8,6 +8,7 @@ import com.yingenus.feature_showcase.domain.LocationRepository
 import com.yingenus.feature_showcase.domain.dto.FilterOption
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 import javax.inject.Provider
@@ -28,13 +29,17 @@ internal class FilterViewModel @Inject constructor(
     }
 
     val brands : StateFlow<List<FilterOption.Brand>> by lazy {
-        filterOptionRepository.getBrands().stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+        flow<List<FilterOption.Brand>> {
+            emit(filterOptionRepository.getBrands())
+        }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
     }
     val prises : StateFlow<List<FilterOption.Prise>> by lazy {
-        filterOptionRepository.getPrises().stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+        flow { emit(filterOptionRepository.getPrises()) }
+            .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
     }
     val sizes : StateFlow<List<FilterOption.Size>> by lazy{
-        filterOptionRepository.getSizes().stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+        flow{emit(filterOptionRepository.getSizes())}
+            .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
     }
 
 }

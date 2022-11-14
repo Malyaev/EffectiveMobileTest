@@ -5,5 +5,5 @@ import com.yingenus.feature_mycart.domain.dto.Cart
 import kotlinx.coroutines.flow.Flow
 
 internal interface CartRepository {
-    fun getMyCart(): Flow<Result<Cart>>
+    suspend fun getMyCart(): Result<Cart>
 }

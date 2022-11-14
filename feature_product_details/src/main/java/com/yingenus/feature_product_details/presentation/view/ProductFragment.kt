@@ -178,6 +178,11 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
                 likeButton!!.isChecked(it)
             }.collect()
         }
+        lifecycleScope.launchWhenStarted {
+            productViewModel.error.onEach {
+
+            }.collect()
+        }
     }
 
 

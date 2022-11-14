@@ -6,6 +6,6 @@ import com.yingenus.core.Result
 import com.yingenus.feature_showcase.domain.dto.BestSellerProduct
 
 internal interface StoreRepository {
-    fun getHomeShowcase(): Flow<Result<HomeShowcase>>
-    fun likeBestSeller( bestSeller: BestSellerProduct, isFavorites : Boolean): Flow<Result<BestSellerProduct>>
+    suspend fun getHomeShowcase(): Result<HomeShowcase>
+    suspend fun likeBestSeller( bestSeller: BestSellerProduct, isFavorites : Boolean): Result<BestSellerProduct>
 }

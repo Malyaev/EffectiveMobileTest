@@ -11,7 +11,10 @@ import com.yingenus.api_network.di.MockyRetrofit
 import com.yingenus.core.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
+import okio.IOException
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -22,27 +25,30 @@ internal class RetrofitRepository @Inject constructor(@MockyRetrofit val retrofi
         retrofit.create(MockyIoService::class.java) as MockyIoService
     }
 
-    override fun getBasket(): Flow<Result<Cart>> {
-        return flow {
-                emit(mockyIoService.getCart().execute().body())
-            }
-            .map { it?.let { Result.Success(it) }?: Result.Empty() }
-            .catch { emit(Result.Error(it)) }.flowOn(Dispatchers.IO)
+    override suspend fun getBasket(): Result<Cart> = withContext(Dispatchers.IO){
+        try {
+            val response =  mockyIoService.getCart()
+            response?.let { Result.Success(it) }?: Result.Empty()
+        }catch ( e : IOException) {
+            Result.Error(e)
+        }
     }
 
-    override fun getProduct(id: Int): Flow<Result<Product>> {
-        return flow {
-                emit(mockyIoService.getProduct().execute().body())
-            }
-            .map { it?.let { Result.Success(it) }?: Result.Empty() }
-            .catch { emit(Result.Error(it)) }.flowOn(Dispatchers.IO)
+    override suspend fun getProduct(id: Int): Result<Product> = withContext(Dispatchers.IO){
+        try {
+            val response = mockyIoService.getProduct()
+            response?.let { Result.Success(it) }?: Result.Empty()
+        } catch (e : IOException){
+            Result.Error(e)
+        }
     }
 
-    override fun getShowcase(): Flow<Result<Showcase>> {
-        return flow {
-                emit(mockyIoService.getShowcase().execute().body())
-            }
-            .map { it?.let { Result.Success(it) }?: Result.Empty() }
-            .catch { emit(Result.Error(it)) }.flowOn(Dispatchers.IO)
+    override suspend fun getShowcase(): Result<Showcase> = withContext(Dispatchers.IO){
+        try {
+            val response =  mockyIoService.getShowcase()
+            response?.let { Result.Success(it) }?: Result.Empty()
+        }catch ( e : IOException) {
+            Result.Error(e)
+        }
     }
 }
