@@ -12,6 +12,7 @@ import android.widget.ViewSwitcher.ViewFactory
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -20,8 +21,10 @@ import com.yingenus.core.textutils.convertPrise
 import com.yingenus.core.viewmodels.ComponentViewModel
 import com.yingenus.feature_showcase.R
 import com.yingenus.feature_showcase.di.FeatureComponent
+import com.yingenus.feature_showcase.domain.dto.Category
 import com.yingenus.feature_showcase.domain.dto.FilterOption
 import com.yingenus.feature_showcase.presentation.viewmodels.FilterViewModel
+import com.yingenus.feature_showcase.presentation.viewmodels.FilterViewModelFactory
 import com.yingenus.feature_showcase.presentation.viewmodels.ShowCaseViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -30,19 +33,27 @@ import javax.inject.Inject
 internal class FilterDialog : BottomSheetDialogFragment(R.layout.bottom_dialog) {
 
     @Inject
-    lateinit var filterViewModelFactory: FilterViewModel.FilterViewModelFactory
+    lateinit var filterViewModelFactory: FilterViewModelFactory.Factory
     @Inject
     lateinit var showCaseViewModelFactory: ShowCaseViewModel.ShowCaseViewModelFactory
     private val filterViewModel by viewModels<FilterViewModel> {
         componentViewModel.getComponent(requireContext().applicationContext as Application).injectFiltersDialog(this)
-        filterViewModelFactory
+        filterViewModelFactory.create(category!!)
     }
+
+    private var category: Category?=null
+
     private val componentViewModel: ComponentViewModel<FeatureComponent> by navGraphViewModels(R.id.main_showcase)
     private val showCaseViewModel : ShowCaseViewModel by navGraphViewModels(R.id.main_showcase)
 
     private var filterBrandHelper : AutoCompleteTextViewHelper<FilterOption.Brand>? = null
     private var filterPriseHelper : AutoCompleteTextViewHelper<FilterOption.Prise>? = null
     private var filterSizeHelper : AutoCompleteTextViewHelper<FilterOption.Size>? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        category = requireArguments().getParcelable<Category>("category")!!
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

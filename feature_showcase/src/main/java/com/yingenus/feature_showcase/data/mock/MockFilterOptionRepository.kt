@@ -1,21 +1,25 @@
 package com.yingenus.feature_showcase.data.mock
 
-import com.yingenus.feature_showcase.domain.FilterOptionRepository
+import com.yingenus.feature_showcase.domain.dto.Category
+import com.yingenus.feature_showcase.domain.repository.FilterOptionRepository
 import com.yingenus.feature_showcase.domain.dto.FilterOption
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import com.yingenus.feature_showcase.domain.dto.FilterOptions
 import javax.inject.Inject
 
 internal class MockFilterOptionRepository @Inject constructor(): FilterOptionRepository {
-    override suspend fun getBrands(): List<FilterOption.Brand> {
+    override suspend fun getFilterOptions(category: Category): FilterOptions {
+        return FilterOptions(getBrands(),getPrises(),getSizes())
+    }
+
+    private fun getBrands(): List<FilterOption.Brand> {
         return listOf(FilterOption.Brand("Samsung"), FilterOption.Brand("Apple"))
     }
 
-    override suspend fun getPrises(): List<FilterOption.Prise> {
+    private fun getPrises(): List<FilterOption.Prise> {
         return listOf(FilterOption.Prise(0,10000))
     }
 
-    override suspend fun getSizes(): List<FilterOption.Size> {
+    private fun getSizes(): List<FilterOption.Size> {
         return listOf(FilterOption.Size(4.5f,5.5f))
     }
 }

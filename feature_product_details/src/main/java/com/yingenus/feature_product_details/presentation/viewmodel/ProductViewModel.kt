@@ -5,43 +5,33 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.yingenus.feature_product_details.domain.ProductRepository
+import com.yingenus.feature_product_details.di.ProductID
+import com.yingenus.feature_product_details.domain.repository.ProductRepository
+import com.yingenus.feature_product_details.domain.usecase.GetProductDetailedUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import javax.inject.Provider
 
-
-internal class ProductViewModelFactory  @AssistedInject constructor(
-    @Assisted private val productId : Int,
-    private val  productViewModelFactory : Provider<ProductViewModel.Factory>
+internal class ProductViewModelFactory  @Inject constructor(
+    private val  productViewModelFactory : Provider<ProductViewModel>
     ): ViewModelProvider.Factory{
-
-    @AssistedFactory
-    interface Factory{
-        fun crate(productId: Int): ProductViewModelFactory
-    }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when(modelClass){
-            ProductViewModel::class.java -> productViewModelFactory.get().crate(productId)
+            ProductViewModel::class.java -> productViewModelFactory.get()
             else -> null
         } as T
     }
 }
 
-internal class ProductViewModel @AssistedInject constructor(
-    @Assisted private val productId : Int,
-    private val productRepository: ProductRepository
+internal class ProductViewModel @Inject constructor(
+    private val getProductDetailedUseCase: GetProductDetailedUseCase
 ): ViewModel() {
-
-    @AssistedFactory
-    interface Factory{
-        fun crate(productId: Int): ProductViewModel
-    }
 
     private val _cpu : MutableStateFlow<String> = MutableStateFlow("")
     val cpu : StateFlow<String>
@@ -93,7 +83,7 @@ internal class ProductViewModel @AssistedInject constructor(
 
     fun update(){
         viewModelScope.launch {
-            val result = productRepository.getProductDetailed(productId)
+            val result = getProductDetailedUseCase()
             when (result) {
                 is com.yingenus.core.Result.Success -> {
                     _cpu.emit(result.value.cpu)

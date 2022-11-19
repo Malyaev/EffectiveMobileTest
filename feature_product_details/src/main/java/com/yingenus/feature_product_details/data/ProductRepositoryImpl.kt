@@ -4,10 +4,8 @@ import android.net.Uri
 import com.yingenus.api_network.api.NetworkApi
 import com.yingenus.api_network.api.dto.Product
 import com.yingenus.core.Result
-import com.yingenus.feature_product_details.domain.ProductRepository
+import com.yingenus.feature_product_details.domain.repository.ProductRepository
 import com.yingenus.feature_product_details.domain.dto.ProductDetailed
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 internal class ProductRepositoryImpl @Inject constructor(

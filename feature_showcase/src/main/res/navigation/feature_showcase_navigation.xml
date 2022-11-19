@@ -25,6 +25,10 @@
         android:name="com.yingenus.feature_showcase.presentation.views.FilterDialog"
         tools:layout="@layout/bottom_dialog"
         >
+        <argument
+            android:name="category"
+            app:argType="com.yingenus.feature_showcase.domain.dto.Category"
+            />
     </dialog>
 
 </navigation>

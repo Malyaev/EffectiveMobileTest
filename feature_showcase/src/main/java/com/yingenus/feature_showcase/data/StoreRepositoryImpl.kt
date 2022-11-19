@@ -5,19 +5,16 @@ import com.yingenus.api_network.api.NetworkApi
 import com.yingenus.api_network.api.dto.BestSeller
 import com.yingenus.api_network.api.dto.HomeStore
 import com.yingenus.api_network.api.dto.Showcase
-import com.yingenus.feature_showcase.domain.StoreRepository
+import com.yingenus.feature_showcase.domain.repository.StoreRepository
 import com.yingenus.feature_showcase.domain.dto.BestSellerProduct
 import com.yingenus.feature_showcase.domain.dto.HomeShowcase
 import com.yingenus.feature_showcase.domain.dto.HotSalesProduct
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import com.yingenus.api_network.api.StoreRepository as ApiStoreRepository
 import com.yingenus.core.Result
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-internal class StoreRepositoryImpl @Inject constructor(val networkApi: NetworkApi): StoreRepository {
+internal class StoreRepositoryImpl @Inject constructor(val networkApi: NetworkApi):
+    StoreRepository {
 
     companion object{
 

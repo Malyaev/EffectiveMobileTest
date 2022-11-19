@@ -5,6 +5,7 @@ import android.app.Application
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,7 +88,7 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
         }
         toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.filter){
-                openFilters()
+                showCaseViewModel.showFilterDialog()
                 true
             } else false
         }
@@ -193,6 +194,11 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
                     //TODO(show error dialog)
                 }.collect()
         }
+        lifecycleScope.launchWhenStarted {
+            showCaseViewModel.showFilterDialog.onEach {
+                openFilters(it)
+            }.collect()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -213,8 +219,11 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
             }
     }
 
-    private fun openFilters(){
-        findNavController().navigate(R.id.showcase_open_filters)
+    private fun openFilters(category: com.yingenus.feature_showcase.domain.dto.Category){
+        Log.d("ShowcaseFragment", "open filters")
+        val bundle = Bundle()
+        bundle.putParcelable("category",category)
+        findNavController().navigate(R.id.showcase_open_filters,bundle)
     }
 
     private fun openBestSeller(bestSeller: BestSeller){

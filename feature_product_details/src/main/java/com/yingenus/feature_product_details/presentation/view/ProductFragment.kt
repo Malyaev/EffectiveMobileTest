@@ -52,13 +52,13 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
     lateinit var imageLoader: ImageLoader
 
     private val componentViewModel : ComponentViewModel<FeatureProductComponent> by navGraphViewModels(R.id.main_product){
-        ProductComponentViewModelFactory()
+        val id = requireArguments().getInt("id")
+        ProductComponentViewModelFactory(id)
     }
     @Inject
-    lateinit var productViewModelFactory : Provider<ProductViewModelFactory.Factory>
+    lateinit var productViewModelFactory : Provider<ProductViewModelFactory>
     private val productViewModel: ProductViewModel by viewModels{
-        val id = requireArguments().getInt("id")
-        productViewModelFactory.get().crate(id)
+        productViewModelFactory.get()
     }
 
     private var imageViewPager : ViewPager2? = null

@@ -1,29 +1,35 @@
 package com.yingenus.feature_showcase.presentation.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.yingenus.feature_showcase.domain.CategoryRepository
-import com.yingenus.feature_showcase.domain.LocationRepository
-import com.yingenus.feature_showcase.domain.StoreRepository
+import com.yingenus.core.Result
+import com.yingenus.feature_showcase.domain.repository.CategoryRepository
+import com.yingenus.feature_showcase.domain.repository.LocationRepository
+import com.yingenus.feature_showcase.domain.repository.StoreRepository
 import com.yingenus.feature_showcase.domain.dto.FilterOption
+import com.yingenus.feature_showcase.domain.dto.HomeShowcase
 import com.yingenus.feature_showcase.domain.dto.Location
+import com.yingenus.feature_showcase.domain.usecase.*
+import com.yingenus.feature_showcase.domain.usecase.GetCategoryUseCase
+import com.yingenus.feature_showcase.domain.usecase.GetHomeShowcaseUseCase
+import com.yingenus.feature_showcase.domain.usecase.GetLocationsUseCase
+import com.yingenus.feature_showcase.domain.usecase.GetSelectedLocationUseCase
 import com.yingenus.feature_showcase.presentation.adapterItem.BestSeller
 import com.yingenus.feature_showcase.presentation.adapterItem.Category
 import com.yingenus.feature_showcase.presentation.adapterItem.HotSales
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Provider
 
 internal class ShowCaseViewModel  @Inject constructor(
-    private val storeRepository: StoreRepository,
-    private val locationRepository: LocationRepository,
-    private val categoryRepository: CategoryRepository
+    private val getHomeShowcaseUseCase: GetHomeShowcaseUseCase,
+    private val getCategoryUseCase: GetCategoryUseCase,
+    private val getSelectedLocationUseCase: GetSelectedLocationUseCase,
+    private val getLocationsUseCase: GetLocationsUseCase,
+    private val likeBestsellerUseCase: LikeBestsellerUseCase
 ): ViewModel() {
 
     class ShowCaseViewModelFactory @Inject constructor(
@@ -41,10 +47,18 @@ internal class ShowCaseViewModel  @Inject constructor(
     val error : Flow<String?>
         get() = _error.receiveAsFlow()
 
+    private val _showFilterDialog: Channel<com.yingenus.feature_showcase.domain.dto.Category> = Channel()
+    val showFilterDialog : Flow<com.yingenus.feature_showcase.domain.dto.Category>
+        get() = _showFilterDialog.receiveAsFlow()
+
     private val _categoriesStateFlow: MutableStateFlow<List<Category>>
         = MutableStateFlow( emptyList() )
     val categories : StateFlow<List<Category>>
         get() = _categoriesStateFlow.asStateFlow()
+    private val selectedCategory : StateFlow<Category?> =
+        categories.map {
+            it.find { it.isSelected }
+        }.stateIn(viewModelScope, SharingStarted.Lazily, null)
 
     private val _hotSalesStateFlow: MutableStateFlow<List<HotSales>>
         = MutableStateFlow( emptyList() )
@@ -61,42 +75,44 @@ internal class ShowCaseViewModel  @Inject constructor(
         get() = _selectedLocation.asStateFlow()
 
     val locations : StateFlow<List<Location>> by lazy{
-        flow { emit(locationRepository.getAllLocations()) }
+        flow { emit(getLocationsUseCase()) }
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
     }
 
     fun updateViewModel(){
         viewModelScope.launch {
             launch {
-                val homeShowcase = storeRepository.getHomeShowcase()
-                when(homeShowcase){
-                    is com.yingenus.core.Result.Success -> {
-                        _hotSalesStateFlow.emit(homeShowcase.value.homeStoreProducts
-                            .map { HotSales(it) })
-                        _bestSellersStateFlow.emit(homeShowcase.value.bestSellers
-                            .map { BestSeller(it) })
-                    }
-                    is com.yingenus.core.Result.Error -> {
-                        _error.send(homeShowcase.toString())
-                    }
-                    else -> Unit
-                }
-            }
-            launch {
-                val locations = locationRepository
-                    .getSelectedLocation()
-                _selectedLocation.emit(locations)
-            }
-            launch {
-                val category = categoryRepository
-                    .getCategories()
+                val category = getCategoryUseCase()
                 _categoriesStateFlow.emit(
                     category.mapIndexed{ i, c ->
                         Category(c, i == 0)
                     }
                 )
             }
+            launch {
+                val locations = getSelectedLocationUseCase()
+                _selectedLocation.emit(locations)
+            }
         }
+        selectedCategory.map {
+                it?.let {  getHomeShowcaseUseCase(it.category)}?:
+                com.yingenus.core.Result.Empty<HomeShowcase>()
+            }
+            .onEach {
+                when(it){
+                    is com.yingenus.core.Result.Success -> {
+                        _hotSalesStateFlow.emit(it.value.homeStoreProducts
+                            .map { HotSales(it) })
+                        _bestSellersStateFlow.emit(it.value.bestSellers
+                            .map { BestSeller(it) })
+                    }
+                    is com.yingenus.core.Result.Error -> {
+                        _error.send(it.toString())
+                    }
+                    else -> Unit
+                }
+            }
+            .launchIn(viewModelScope)
     }
     fun categorySelected( category: Category){
         viewModelScope.launch {
@@ -110,10 +126,16 @@ internal class ShowCaseViewModel  @Inject constructor(
         }
     }
 
+    fun showFilterDialog(){
+        viewModelScope.launch {
+            selectedCategory.value?.let { _showFilterDialog.send(it.category) }
+        }
+    }
+
     fun likeBestSeller( bestSeller: BestSeller, isLicked : Boolean){
         viewModelScope.launch {
-            val result = storeRepository
-                .likeBestSeller(bestSeller.bestSellerProduct,isLicked)
+            val result = likeBestsellerUseCase(bestSeller.bestSellerProduct,isLicked)
+
             when(result){
                 is com.yingenus.core.Result.Success ->{
                     val updated = _bestSellersStateFlow.value.map {

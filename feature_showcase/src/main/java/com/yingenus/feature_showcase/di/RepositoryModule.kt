@@ -4,10 +4,10 @@ import com.yingenus.feature_showcase.data.CategoryRepositoryImpl
 import com.yingenus.feature_showcase.data.StoreRepositoryImpl
 import com.yingenus.feature_showcase.data.mock.MockFilterOptionRepository
 import com.yingenus.feature_showcase.data.mock.MockLocationRepository
-import com.yingenus.feature_showcase.domain.CategoryRepository
-import com.yingenus.feature_showcase.domain.FilterOptionRepository
-import com.yingenus.feature_showcase.domain.LocationRepository
-import com.yingenus.feature_showcase.domain.StoreRepository
+import com.yingenus.feature_showcase.domain.repository.CategoryRepository
+import com.yingenus.feature_showcase.domain.repository.FilterOptionRepository
+import com.yingenus.feature_showcase.domain.repository.LocationRepository
+import com.yingenus.feature_showcase.domain.repository.StoreRepository
 import dagger.Binds
 import dagger.Module
 

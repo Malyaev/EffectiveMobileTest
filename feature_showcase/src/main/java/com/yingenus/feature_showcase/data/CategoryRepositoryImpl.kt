@@ -1,16 +1,14 @@
 package com.yingenus.feature_showcase.data
 
 import android.content.Context
-import android.content.res.AssetManager
 import android.net.Uri
 import com.yingenus.feature_showcase.R
-import com.yingenus.feature_showcase.domain.CategoryRepository
+import com.yingenus.feature_showcase.domain.repository.CategoryRepository
 import com.yingenus.feature_showcase.domain.dto.Category
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-internal class CategoryRepositoryImpl @Inject constructor(private val context: Context): CategoryRepository {
+internal class CategoryRepositoryImpl @Inject constructor(private val context: Context):
+    CategoryRepository {
 
     private companion object{
         fun fileUri(name: String)= Uri.parse("file:///android_asset/$name")

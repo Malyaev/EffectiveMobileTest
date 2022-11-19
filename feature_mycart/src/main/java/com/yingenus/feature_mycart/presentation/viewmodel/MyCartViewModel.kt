@@ -7,6 +7,7 @@ import com.yingenus.feature_mycart.domain.repository.CartRepository
 import com.yingenus.feature_mycart.domain.dto.BasketProduct
 import com.yingenus.feature_mycart.domain.dto.Cart
 import com.yingenus.feature_mycart.domain.dto.Delivery
+import com.yingenus.feature_mycart.domain.usecase.GetMyCartUsecase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -14,7 +15,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 internal class MyCartViewModel @Inject constructor(
-    private val cartRepository: CartRepository
+    private val getMyCartUsecase: GetMyCartUsecase
     ) : ViewModel() {
 
     class MyCartViewModelProvider @Inject constructor(
@@ -46,7 +47,7 @@ internal class MyCartViewModel @Inject constructor(
 
     fun update(){
         viewModelScope.launch {
-            val result = cartRepository.getMyCart()
+            val result = getMyCartUsecase.invoke()
             when(result){
                 is com.yingenus.core.Result.Success -> updateCart(result.value)
                 is com.yingenus.core.Result.Error -> _error.send(result.error.toString())

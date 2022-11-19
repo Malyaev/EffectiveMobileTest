@@ -4,10 +4,11 @@ import com.yingenus.core.viewmodels.ComponentViewModel
 import com.yingenus.feature_product_details.di.FeatureProductComponent
 import com.yingenus.feature_product_details.di.ProductDependenciesProvider
 
-internal class ProductComponentViewModelFactory :
+
+internal class ProductComponentViewModelFactory( productId : Int) :
     ComponentViewModel.ComponentViewModelFactory<FeatureProductComponent>({ application ->
         require(application is ProductDependenciesProvider){
             "application class must implenemt ProductDependenciesProvider"
         }
-        FeatureProductComponent.init(application)
+        FeatureProductComponent.init(application,productId)
     })
