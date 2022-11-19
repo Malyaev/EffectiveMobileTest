@@ -1,6 +1,7 @@
 package com.yingenus.feature_showcase.presentation.views
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
@@ -21,7 +22,9 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.core.colors.resolveColorAttr
 import com.yingenus.core.sizeutils.dp2px
+import com.yingenus.core.viewmodels.ComponentViewModel
 import com.yingenus.feature_showcase.R
+import com.yingenus.feature_showcase.di.FeatureComponent
 import com.yingenus.feature_showcase.domain.dto.Location
 import com.yingenus.feature_showcase.presentation.adapterItem.*
 import com.yingenus.feature_showcase.presentation.adapterItem.BestSeller
@@ -31,8 +34,8 @@ import com.yingenus.feature_showcase.presentation.adapterItem.ShopItem
 import com.yingenus.feature_showcase.presentation.adapterdelegate.*
 import com.yingenus.feature_showcase.presentation.adapterdelegate.getCategoryAdapterDelegate
 import com.yingenus.feature_showcase.presentation.adapterdelegate.getHotSalesAdapterDelegate
-import com.yingenus.feature_showcase.presentation.viewmodels.ComponentViewModel
 import com.yingenus.feature_showcase.presentation.viewmodels.ShowCaseViewModel
+import com.yingenus.feature_showcase.presentation.viewmodels.ShowcaseComponentViewModelFactory
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -53,14 +56,16 @@ internal class ShowcaseFragment : Fragment(R.layout.shop_layout) {
     @Inject
     lateinit var showCaseViewModelFactory: ShowCaseViewModel.ShowCaseViewModelFactory
 
-    private val componentViewModel : ComponentViewModel by navGraphViewModels(R.id.main_showcase)
+    private val componentViewModel : ComponentViewModel<FeatureComponent> by navGraphViewModels(R.id.main_showcase){
+        ShowcaseComponentViewModelFactory()
+    }
     private val showCaseViewModel : ShowCaseViewModel by navGraphViewModels<ShowCaseViewModel>(R.id.main_showcase) {
         showCaseViewModelFactory
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        componentViewModel.getFeatureComponent(requireActivity()).injectShowFragment(this)
+        componentViewModel.getComponent(requireContext().applicationContext as Application).injectShowFragment(this)
     }
 
     override fun onCreateView(

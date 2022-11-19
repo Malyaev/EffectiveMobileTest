@@ -1,5 +1,6 @@
 package com.yingenus.feature_mycart.presentation.view
 
+import android.app.Application
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,12 +19,14 @@ import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.core.colors.resolveColorAttr
 import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.core.textutils.convertPrise
+import com.yingenus.core.viewmodels.ComponentViewModel
 import com.yingenus.feature_mycart.R
+import com.yingenus.feature_mycart.di.FeatureMyCartComponent
 import com.yingenus.feature_mycart.domain.dto.Delivery
 import com.yingenus.feature_mycart.presentation.adapterdelegate.getProductDelegate
 import com.yingenus.feature_mycart.presentation.adapteritem.BasketItem
 import com.yingenus.feature_mycart.presentation.adapteritem.Product
-import com.yingenus.feature_mycart.presentation.viewmodel.ComponentViewModel
+import com.yingenus.feature_mycart.presentation.viewmodel.MyCartComponentViewModelFactory
 import com.yingenus.feature_mycart.presentation.viewmodel.MyCartViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -35,7 +38,9 @@ internal class MyCartFragment : Fragment(R.layout.my_cart_fragment) {
     @Inject
     lateinit var imageLoader: ImageLoader
 
-    private val componentViewModule: ComponentViewModel by viewModels()
+    private val componentViewModule: ComponentViewModel<FeatureMyCartComponent> by viewModels{
+        MyCartComponentViewModelFactory()
+    }
     @Inject
     lateinit var myCartViewModelProvider: Provider<MyCartViewModel.MyCartViewModelProvider>
     private val myCartViewModel : MyCartViewModel by viewModels{
@@ -49,7 +54,9 @@ internal class MyCartFragment : Fragment(R.layout.my_cart_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        componentViewModule.getFeatureComponent().injectMyCartFragment(this)
+        componentViewModule
+            .getComponent(requireContext().applicationContext as Application)
+            .injectMyCartFragment(this)
     }
 
     override fun onCreateView(

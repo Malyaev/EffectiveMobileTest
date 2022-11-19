@@ -5,26 +5,13 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Component(
-    modules = [RepositoryModule::class],
-    dependencies = [NetworkDependency::class]
+    modules = [NetworkModule::class]
 )
 @Singleton
-internal abstract class NetworkComponent : NetworkApi{
+interface NetworkComponent : NetworkApi{
     companion object{
-        @Volatile
-        private var networkComponent : NetworkComponent? = null
-
-        fun initAndGet( dependency: NetworkDependency): NetworkComponent{
-            if (networkComponent == null){
-                synchronized(NetworkComponent::class){
-                    if (networkComponent == null){
-                        networkComponent = DaggerNetworkComponent.builder()
-                            .networkDependency(dependency)
-                            .build()
-                    }
-                }
-            }
-            return networkComponent!!;
+        fun create(): NetworkComponent{
+            TODO()
         }
     }
 }

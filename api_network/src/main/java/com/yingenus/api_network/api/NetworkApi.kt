@@ -4,5 +4,4 @@ interface NetworkApi {
     fun getCartRepository(): CartRepository
     fun getProductRepository(): ProductRepository
     fun getStoreRepository(): StoreRepository
-    fun getImageLoader(): ImageLoader
 }

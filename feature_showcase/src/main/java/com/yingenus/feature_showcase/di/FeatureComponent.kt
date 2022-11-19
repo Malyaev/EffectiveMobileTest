@@ -7,18 +7,17 @@ import com.yingenus.feature_showcase.presentation.views.ShowcaseFragment
 import dagger.BindsInstance
 import dagger.Component
 
-@Component(modules = [FeatureModule::class], dependencies = [ShowcaseDependencies::class])
+@Component(modules = [FeatureModule::class], dependencies = [ShowcaseDependenciesProvider::class])
 @Showcase
 internal abstract class FeatureComponent {
 
     @Component.Factory
     interface Factory{
-        fun create(showcaseDependencies: ShowcaseDependencies, @BindsInstance context: Context): FeatureComponent
-
+        fun create(showcaseDependencies: ShowcaseDependenciesProvider, @BindsInstance context: Context): FeatureComponent
     }
 
     companion object{
-        fun init( dependencies: ShowcaseDependencies, context: Context): FeatureComponent{
+        fun init( dependencies: ShowcaseDependenciesProvider, context: Context): FeatureComponent{
             return DaggerFeatureComponent.factory().create(dependencies,context)
         }
     }

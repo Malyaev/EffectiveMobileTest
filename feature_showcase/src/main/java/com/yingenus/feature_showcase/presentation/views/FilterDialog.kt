@@ -1,5 +1,6 @@
 package com.yingenus.feature_showcase.presentation.views
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +17,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yingenus.core.sizeutils.dp2px
 import com.yingenus.core.textutils.convertPrise
+import com.yingenus.core.viewmodels.ComponentViewModel
 import com.yingenus.feature_showcase.R
+import com.yingenus.feature_showcase.di.FeatureComponent
 import com.yingenus.feature_showcase.domain.dto.FilterOption
-import com.yingenus.feature_showcase.presentation.viewmodels.ComponentViewModel
 import com.yingenus.feature_showcase.presentation.viewmodels.FilterViewModel
 import com.yingenus.feature_showcase.presentation.viewmodels.ShowCaseViewModel
 import kotlinx.coroutines.flow.collect
@@ -32,14 +34,11 @@ internal class FilterDialog : BottomSheetDialogFragment(R.layout.bottom_dialog) 
     @Inject
     lateinit var showCaseViewModelFactory: ShowCaseViewModel.ShowCaseViewModelFactory
     private val filterViewModel by viewModels<FilterViewModel> {
-        componentViewModel.getFeatureComponent(requireActivity()).injectFiltersDialog(this)
+        componentViewModel.getComponent(requireContext().applicationContext as Application).injectFiltersDialog(this)
         filterViewModelFactory
     }
-    private val componentViewModel: ComponentViewModel by navGraphViewModels(R.id.main_showcase)
-    private val showCaseViewModel : ShowCaseViewModel by navGraphViewModels<ShowCaseViewModel>(R.id.main_showcase) {
-        if (!::showCaseViewModelFactory.isInitialized) componentViewModel.getFeatureComponent(requireActivity()).injectFiltersDialog(this)
-        showCaseViewModelFactory
-    }
+    private val componentViewModel: ComponentViewModel<FeatureComponent> by navGraphViewModels(R.id.main_showcase)
+    private val showCaseViewModel : ShowCaseViewModel by navGraphViewModels(R.id.main_showcase)
 
     private var filterBrandHelper : AutoCompleteTextViewHelper<FilterOption.Brand>? = null
     private var filterPriseHelper : AutoCompleteTextViewHelper<FilterOption.Prise>? = null

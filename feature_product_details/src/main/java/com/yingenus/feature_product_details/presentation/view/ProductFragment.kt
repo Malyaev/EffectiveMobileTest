@@ -1,5 +1,6 @@
 package com.yingenus.feature_product_details.presentation.view
 
+import android.app.Application
 import android.content.Context
 import android.graphics.Rect
 import android.net.Uri
@@ -26,13 +27,15 @@ import com.yingenus.core.ImageUtils.isChecked
 import com.yingenus.api_network.api.ImageLoader
 import com.yingenus.core.colors.resolveColorAttr
 import com.yingenus.core.sizeutils.dp2px
+import com.yingenus.core.viewmodels.ComponentViewModel
 import com.yingenus.core.viewutils.findView
 import com.yingenus.feature_product_details.R
+import com.yingenus.feature_product_details.di.FeatureProductComponent
 import com.yingenus.feature_product_details.presentation.adapterelegat.getImageAdapterDelegate
 import com.yingenus.feature_product_details.presentation.adapteritem.Image
 import com.yingenus.feature_product_details.presentation.adapteritem.ImageItem
 import com.yingenus.feature_product_details.presentation.adapters.ProductInfoAdapter
-import com.yingenus.feature_product_details.presentation.viewmodel.ComponentViewModel
+import com.yingenus.feature_product_details.presentation.viewmodel.ProductComponentViewModelFactory
 import com.yingenus.feature_product_details.presentation.viewmodel.ProductViewModel
 import com.yingenus.feature_product_details.presentation.viewmodel.ProductViewModelFactory
 import kotlinx.coroutines.flow.collect
@@ -48,7 +51,9 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
     @Inject
     lateinit var imageLoader: ImageLoader
 
-    private val componentViewModel : ComponentViewModel by navGraphViewModels(R.id.main_product)
+    private val componentViewModel : ComponentViewModel<FeatureProductComponent> by navGraphViewModels(R.id.main_product){
+        ProductComponentViewModelFactory()
+    }
     @Inject
     lateinit var productViewModelFactory : Provider<ProductViewModelFactory.Factory>
     private val productViewModel: ProductViewModel by viewModels{
@@ -66,7 +71,8 @@ internal class ProductFragment : Fragment(R.layout.product_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        componentViewModel.getFeatureComponent().injectProductFragment(this)
+        componentViewModel.getComponent(requireContext().applicationContext as Application)
+            .injectProductFragment(this)
     }
 
     override fun onCreateView(

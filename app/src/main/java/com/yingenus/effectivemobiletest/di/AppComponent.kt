@@ -1,25 +1,25 @@
 package com.yingenus.effectivemobiletest.di
 
 import android.content.Context
+import com.yingenus.api_network.api.NetworkApi
+import com.yingenus.api_network.di.ImageLoaderComponent
+import com.yingenus.feature_mycart.di.MyCartDependencyProvider
+import com.yingenus.feature_product_details.di.ProductDependenciesProvider
+import com.yingenus.feature_showcase.di.ShowcaseDependenciesProvider
 import dagger.BindsInstance
 import dagger.Component
 
-@Component(modules = [InitializerModule::class])
-abstract class AppComponent {
+@Component(modules = [AppModule::class], dependencies = [ImageLoaderComponent::class, NetworkApi::class])
+abstract class AppComponent :
+    ShowcaseDependenciesProvider,
+    ProductDependenciesProvider,
+    MyCartDependencyProvider {
 
     @Component.Builder
     interface Builder{
-        @BindsInstance
-        fun context(context: Context): Builder
+        fun networkApi( networkApi: NetworkApi): Builder
+        fun imageLoaderComponent( imageLoaderComponent: ImageLoaderComponent): Builder
         fun build(): AppComponent
     }
-
-    companion object{
-        fun initAndGet(context: Context): AppComponent{
-            return DaggerAppComponent.builder().context(context).build()
-        }
-    }
-
-    abstract fun getFeatureModulesInitializer(): FeatureModulesInitializer
 
 }
